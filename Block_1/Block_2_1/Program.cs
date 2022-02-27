@@ -7,7 +7,7 @@ namespace Block_2_1
     {
         static void Main(string[] args)
         {
-            // Данные стдента
+            // Данные студента
             string FullName = "Пупкин Василий Ололоевич";
             int age = 37;
             string email = "VO_Pupkin@ya.ru";
@@ -23,6 +23,13 @@ namespace Block_2_1
             WriteLine($"Баллы по Математике: \t\t{points_math}");
             WriteLine($"Баллы по Физике: \t\t{points_pysh}");
             ReadKey();          // пауза
+
+            double sum_points = points_code + points_math + points_pysh;        // сумма баллов предметов
+            double everage = sum_points / 3;                                    // средний балл
+
+            // Вывод среднего балла
+            WriteLine($"\nСредний балл равен: {everage}");
+            ReadKey();
         }
     }
 }
