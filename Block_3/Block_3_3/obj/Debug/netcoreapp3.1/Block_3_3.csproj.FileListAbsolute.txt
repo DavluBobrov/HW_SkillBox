@@ -1,0 +1,12 @@
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\bin\Debug\netcoreapp3.1\Block_3_3.exe
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\bin\Debug\netcoreapp3.1\Block_3_3.deps.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\bin\Debug\netcoreapp3.1\Block_3_3.runtimeconfig.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\bin\Debug\netcoreapp3.1\Block_3_3.runtimeconfig.dev.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\bin\Debug\netcoreapp3.1\Block_3_3.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\bin\Debug\netcoreapp3.1\Block_3_3.pdb
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.AssemblyInfoInputs.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.AssemblyInfo.cs
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.csproj.CoreCompileInputs.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.pdb
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.genruntimeconfig.cache
