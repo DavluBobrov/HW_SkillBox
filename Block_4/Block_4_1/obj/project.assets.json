@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_4_1\\Block_4_1\\Block_4_1.csproj",
+      "projectUniqueName": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_4\\Block_4_1\\Block_4_1.csproj",
       "projectName": "Block_4_1",
-      "projectPath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_4_1\\Block_4_1\\Block_4_1.csproj",
+      "projectPath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_4\\Block_4_1\\Block_4_1.csproj",
       "packagesPath": "C:\\Users\\DavluBobrov\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_4_1\\Block_4_1\\obj\\",
+      "outputPath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_4\\Block_4_1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
