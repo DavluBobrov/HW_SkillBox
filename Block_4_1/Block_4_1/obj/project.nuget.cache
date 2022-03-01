@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZIRdRD331EwDt3xpl5nQ1cSf4bd/CLIZigFKbH6ZQjuU7ZqdnvTPCIXJDkkqKd0trM1yJ/uu4jdI3++axdCfDw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_4_1\\Block_4_1\\Block_4_1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DavluBobrov\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}

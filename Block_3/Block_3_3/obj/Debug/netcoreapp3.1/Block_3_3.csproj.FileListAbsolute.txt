@@ -10,3 +10,4 @@ C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\
 C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.dll
 C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.pdb
 C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.genruntimeconfig.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_3\Block_3_3\obj\Debug\netcoreapp3.1\Block_3_3.csprojAssemblyReference.cache
