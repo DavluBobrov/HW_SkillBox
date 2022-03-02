@@ -8,59 +8,42 @@ namespace Block_4_3
         static void Main(string[] args)
         {
             Console.WriteLine("Игра \"Угадай-ка\"");
+            Console.WriteLine("Введите до какого числа гадаем (начинается с нуля)");
+            string data = Console.ReadLine();
+            int n = Int32.Parse(data);
+            Random rand = new Random();
+
+            int iiNumber = rand.Next(1, n + 1);
+            int count = 0;
+            Console.Write("\nВведите число: ");
+            count++;
             while (true)
             {
-                Console.WriteLine("Введите до какого числа гадаем (начинается с нуля)");
-                string data = Console.ReadLine();
-                bool is_number = Int32.TryParse(data, out int n);
-                if (is_number)
+                data = Console.ReadLine();
+                if (data != "")
                 {
-                    Random rand = new Random();
-
-                    int iiNumber = rand.Next(1, n + 1);
-                    int count = 0;
-
-                    while (true)
+                    int userNumber = Int32.Parse(data);
+                    if (userNumber < iiNumber)
                     {
-                        Console.Write("\nВведите число: ");
-                        count++;
-                        data = Console.ReadLine();
-                        if (data != " ")
-                        {
-                            is_number = Int32.TryParse(data, out int userNumber);
-                            if (is_number)
-                            {
-                                if (userNumber < iiNumber)
-                                {
-                                    Console.WriteLine("Введенное число меньше загаданного. Попробуйте ещё раз");
-                                }
-                                else if (userNumber > iiNumber)
-                                {
-                                    Console.WriteLine("Введенное число больше загаданного. Попробуйте ещё раз");
-                                }
-                                else
-                                {
-                                    Console.WriteLine($"Поздравляю, число угадано! Число попыток: {count}.");
-                                    Console.ReadKey();
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Ошибка Ввода! Если хотите прекратить игру, нажмите пробел.");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Очень жаль, что вы сдались, загадано было число {iiNumber}");
-                            Console.ReadKey();
-                            break;
-                        }
+                        Console.WriteLine("Введенное число меньше загаданного. Попробуйте ещё раз");
                     }
+                    else if (userNumber > iiNumber)
+                    {
+                        Console.WriteLine("Введенное число больше загаданного. Попробуйте ещё раз");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Поздравляю, число угадано! Число попыток: {count}.");
+                        break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Очень жаль, что вы сдались, загадано было число {iiNumber}");
                     break;
                 }
-                else Console.WriteLine("Ошибка ввода");
             }
+            Console.ReadKey();
         }
     }
 }
