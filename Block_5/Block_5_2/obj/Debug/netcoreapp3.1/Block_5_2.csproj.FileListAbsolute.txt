@@ -1,0 +1,13 @@
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\bin\Debug\netcoreapp3.1\Block_5_2.exe
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\bin\Debug\netcoreapp3.1\Block_5_2.deps.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\bin\Debug\netcoreapp3.1\Block_5_2.runtimeconfig.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\bin\Debug\netcoreapp3.1\Block_5_2.runtimeconfig.dev.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\bin\Debug\netcoreapp3.1\Block_5_2.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\bin\Debug\netcoreapp3.1\Block_5_2.pdb
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\obj\Debug\netcoreapp3.1\Block_5_2.csprojAssemblyReference.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\obj\Debug\netcoreapp3.1\Block_5_2.AssemblyInfoInputs.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\obj\Debug\netcoreapp3.1\Block_5_2.AssemblyInfo.cs
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\obj\Debug\netcoreapp3.1\Block_5_2.csproj.CoreCompileInputs.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\obj\Debug\netcoreapp3.1\Block_5_2.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\obj\Debug\netcoreapp3.1\Block_5_2.pdb
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_5\Block_5_2\obj\Debug\netcoreapp3.1\Block_5_2.genruntimeconfig.cache
