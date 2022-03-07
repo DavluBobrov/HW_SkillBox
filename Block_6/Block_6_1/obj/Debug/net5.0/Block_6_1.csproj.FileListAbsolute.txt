@@ -1,0 +1,16 @@
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\bin\Debug\net5.0\Block_6_1.exe
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\bin\Debug\net5.0\Block_6_1.deps.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\bin\Debug\net5.0\Block_6_1.runtimeconfig.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\bin\Debug\net5.0\Block_6_1.runtimeconfig.dev.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\bin\Debug\net5.0\Block_6_1.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\bin\Debug\net5.0\ref\Block_6_1.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\bin\Debug\net5.0\Block_6_1.pdb
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\Block_6_1.csproj.AssemblyReference.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\Block_6_1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\Block_6_1.AssemblyInfoInputs.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\Block_6_1.AssemblyInfo.cs
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\Block_6_1.csproj.CoreCompileInputs.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\Block_6_1.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\ref\Block_6_1.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\Block_6_1.pdb
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_6\Block_6_1\obj\Debug\net5.0\Block_6_1.genruntimeconfig.cache

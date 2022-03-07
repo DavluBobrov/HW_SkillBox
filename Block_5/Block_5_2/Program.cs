@@ -9,7 +9,7 @@ namespace Block_5_2
         {
             WriteLine("Введите любой текст через пробел:"); 
             string input_text = ReadLine();
-            InverseWords(input_text);
+            ReverseWords(input_text);
             ReadKey();
         }
 
@@ -27,9 +27,9 @@ namespace Block_5_2
         /// Метод перестановки слов наоборот
         /// </summary>
         ///
-        static void InverseWords(string text_fo_inverse)
+        static void ReverseWords(string inputPhrase)
         {
-            string[] arr = SplitTextInArray(text_fo_inverse);
+            string[] arr = SplitTextInArray(inputPhrase);
             Array.Reverse(arr);
             PrintArrayWords(arr);
         }
