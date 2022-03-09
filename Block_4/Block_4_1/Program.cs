@@ -5,7 +5,7 @@ namespace Block_4_1
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             try
             {

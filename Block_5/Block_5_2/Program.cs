@@ -5,7 +5,7 @@ namespace Block_5_2
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             WriteLine("Введите любой текст через пробел:"); 
             string input_text = ReadLine();

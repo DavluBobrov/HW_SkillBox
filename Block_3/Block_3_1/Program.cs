@@ -5,7 +5,7 @@ namespace Block_3_1
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // Запрос пользователю
             while (true)

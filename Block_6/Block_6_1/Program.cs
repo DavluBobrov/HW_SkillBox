@@ -6,7 +6,7 @@ namespace Block_6_1
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Выберите действие:");
             Console.WriteLine("1. Вывод справочника на экран:");

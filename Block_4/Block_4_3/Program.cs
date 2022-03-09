@@ -5,7 +5,7 @@ namespace Block_4_3
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Игра \"Угадай-ка\"");
             Console.WriteLine("Введите до какого числа гадаем (начинается с нуля)");

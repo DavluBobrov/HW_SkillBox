@@ -1,0 +1,16 @@
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\bin\Debug\net5.0\Block_7.exe
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\bin\Debug\net5.0\Block_7.deps.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\bin\Debug\net5.0\Block_7.runtimeconfig.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\bin\Debug\net5.0\Block_7.runtimeconfig.dev.json
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\bin\Debug\net5.0\Block_7.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\bin\Debug\net5.0\ref\Block_7.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\bin\Debug\net5.0\Block_7.pdb
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\Block_7.csproj.AssemblyReference.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\Block_7.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\Block_7.AssemblyInfoInputs.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\Block_7.AssemblyInfo.cs
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\Block_7.csproj.CoreCompileInputs.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\Block_7.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\ref\Block_7.dll
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\Block_7.pdb
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_7\Block_7\obj\Debug\net5.0\Block_7.genruntimeconfig.cache
