@@ -203,9 +203,15 @@ namespace Block_7
         /// <param name="ID">ID Сотрудника</param>
         public void RemoveMember(int ID)
         {
-            string newText = string.Empty;
+            //string newText = string.Empty;
             GetWorker(ID, out int index);
-            workArray[index] = new Worker();
+            for (int i = index; i < Count-1; i++)
+            {
+                workArray[i] = workArray[i + 1];
+            }
+            Array.Resize(ref workArray, workArray.Length - 1);
+            this.index--;
+            //workArray[index] = new Worker();
             //SortCollection();
             Save();
         }
@@ -265,7 +271,7 @@ namespace Block_7
         /// <param name="flag">Требование увеличение</param>
         void Resize(bool flag)
         {
-            if (flag) Array.Resize(ref workArray, workArray.Length + 5);
+            if (flag) Array.Resize(ref workArray, workArray.Length + 1);
         }
 
         /// <summary>

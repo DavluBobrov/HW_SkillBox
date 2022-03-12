@@ -11,7 +11,10 @@ namespace Block_7
             {
                 string dirPath = "Directory.txt";
                 CollectionDir dir = new(dirPath);
+                Console.Clear();
                 Menu();
+
+                
 
                 switch (Console.ReadLine())
                 {
@@ -39,7 +42,7 @@ namespace Block_7
                     case "6":
                         Console.WriteLine("По возрастанию - 0, по убыванию - 1");
                         dir.SortCollection(Conv_0_1_toBool(Console.ReadLine()));
-                        dir.Save();
+                        dir.PrintCollection();
                         break;
                     case "7":
                         dir.PrintCollection(); break;
