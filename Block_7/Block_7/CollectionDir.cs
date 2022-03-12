@@ -22,7 +22,7 @@ namespace Block_7
         {
             this.path = path;
             this.MaxID = 0;
-            this.index = 0;
+            this.index = -1;
             this.workArray = new Worker[1];
             InitCollection();
         }
@@ -100,28 +100,22 @@ namespace Block_7
             PrintTitle();
             foreach (var w in workArray)
             {
-                PrintWorker(w);
-                Console.WriteLine();
+                if (w.ID != 0) PrintWorker(w);
             }
         }
 
         /// <summary>
         /// Сортировка коллекции по дате создания записи
         /// </summary>
-        public void SortCollection()
+        public void SortCollection(bool flagReverse = false)
         {
+            DateTime[] datarr = new DateTime[Count];
             for (int i = 0; i < Count; i++)
             {
-                for (int ii = i + 1; ii < Count; ii++)
-                {
-                    if (workArray[i].DateAdd > workArray[ii].DateAdd)
-                    {
-                        var buf = workArray[i];
-                        workArray[i] = workArray[ii];
-                        workArray[ii] = buf;
-                    }
-                }
+                datarr[i] = workArray[i].DateAdd;
             }
+            Array.Sort(datarr, workArray);
+            if (flagReverse) Array.Reverse(workArray, 0, Count);
         }
 
         /// <summary>
@@ -130,10 +124,14 @@ namespace Block_7
         public void Save()
         {
             string[] arr = new string[Count];
+            int j = 0;
             for (int i = 0; i < Count; i++)
             {
                 if (workArray[i].ID != 0)
-                    arr[i] = WorkerToString(workArray[i]);
+                {
+                    arr[j] = WorkerToString(workArray[i]);
+                    j++;
+                }
             }
             File.WriteAllLines(Path, arr);
         }
@@ -206,17 +204,10 @@ namespace Block_7
         public void RemoveMember(int ID)
         {
             string newText = string.Empty;
-            using (StreamReader sr = new(Path))
-            {
-                while (!sr.EndOfStream)
-                {
-                    string rLine = sr.ReadLine();
-                    string[] arg = rLine.Split("#");
-                    Worker w = ParserLineFile(arg);
-                    if (w.ID != ID) newText += rLine + "\n";
-                }
-            }
-            File.WriteAllText(Path, newText);
+            GetWorker(ID, out int index);
+            workArray[index] = new Worker();
+            //SortCollection();
+            Save();
         }
 
         /// <summary>
@@ -283,9 +274,9 @@ namespace Block_7
         /// <param name="worker">Структура Worker</param>
         void AddWorkerInCollection(Worker worker)
         {
+            this.index++;
             this.Resize(index >= this.workArray.Length);
             this.workArray[index] = worker;
-            this.index++;
         }
 
         /// <summary>
