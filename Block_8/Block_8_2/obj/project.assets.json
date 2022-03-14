@@ -16,11 +16,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_8\\Block_8\\Block_8.csproj",
-      "projectName": "Block_8",
-      "projectPath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_8\\Block_8\\Block_8.csproj",
+      "projectUniqueName": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_8\\Block_8_2\\Block_8_2.csproj",
+      "projectName": "Block_8_2",
+      "projectPath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_8\\Block_8_2\\Block_8_2.csproj",
       "packagesPath": "C:\\Users\\DavluBobrov\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_8\\Block_8\\obj\\",
+      "outputPath": "C:\\Users\\DavluBobrov\\source\\repos\\SkillBox\\HomeWork\\Block_8\\Block_8_2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
