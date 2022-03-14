@@ -11,10 +11,7 @@ namespace Block_7
             {
                 string dirPath = "Directory.txt";
                 CollectionDir dir = new(dirPath);
-                Console.Clear();
                 Menu();
-
-                
 
                 switch (Console.ReadLine())
                 {
