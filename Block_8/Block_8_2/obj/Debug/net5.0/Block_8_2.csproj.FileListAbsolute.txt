@@ -13,3 +13,4 @@ C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_8\Block_8_2\obj\Debug\
 C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_8\Block_8_2\obj\Debug\net5.0\ref\Block_8_2.dll
 C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_8\Block_8_2\obj\Debug\net5.0\Block_8_2.pdb
 C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_8\Block_8_2\obj\Debug\net5.0\Block_8_2.genruntimeconfig.cache
+C:\Users\DavluBobrov\source\repos\SkillBox\HomeWork\Block_8\Block_8_2\obj\Debug\net5.0\Block_8_2.csproj.AssemblyReference.cache

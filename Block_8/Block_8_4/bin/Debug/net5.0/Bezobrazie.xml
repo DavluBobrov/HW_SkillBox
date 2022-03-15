@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Person name="Леша пупкин Ололоевич">
+  <Address>
+    <Street>Пушкина</Street>
+    <HouseNumber>Колотушкина</HouseNumber>
+    <FlatNumber>322</FlatNumber>
+  </Address>
+  <Address>
+    <MobilePhone>8-800-555-35-35</MobilePhone>
+    <FlatPhone>7-495-777-77-77</FlatPhone>
+  </Address>
+</Person>
