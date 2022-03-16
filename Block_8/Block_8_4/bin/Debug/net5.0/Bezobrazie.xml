@@ -3,10 +3,10 @@
   <Address>
     <Street>Пушкина</Street>
     <HouseNumber>Колотушкина</HouseNumber>
-    <FlatNumber>322</FlatNumber>
+    <FlatNumber>1488</FlatNumber>
   </Address>
-  <Address>
+  <Phones>
     <MobilePhone>8-800-555-35-35</MobilePhone>
-    <FlatPhone>7-495-777-77-77</FlatPhone>
-  </Address>
+    <FlatPhone>+7-495-777-77-77</FlatPhone>
+  </Phones>
 </Person>

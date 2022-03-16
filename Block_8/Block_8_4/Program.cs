@@ -19,7 +19,7 @@ namespace Block_8_4
             Console.WriteLine("Введите номер квартиры");
             Address.Add(new XElement("FlatNumber", Console.ReadLine()));
             Header.Add(Address);
-            XElement Phones = new XElement("Address");
+            XElement Phones = new XElement("Phones");
             Console.WriteLine("Введите номер телефона");
             Phones.Add(new XElement("MobilePhone", Console.ReadLine()));
             Console.WriteLine("Введите домашний телефон");

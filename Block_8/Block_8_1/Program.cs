@@ -39,7 +39,7 @@ namespace Block_8_1
         {
             for (int i = 0; i < list.Count; i++)
             {
-                if (list[i] >= 25 && list[i] <= 50) list.Remove(list[i]);
+                if (list[i] >= 25 && list[i] <= 50) list.RemoveAt(i);
             }
         }
     }
