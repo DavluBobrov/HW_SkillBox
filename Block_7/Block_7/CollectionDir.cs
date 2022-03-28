@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using static System.Console;
 
 namespace Block_7
@@ -32,6 +33,16 @@ namespace Block_7
         /// </summary>
         void InitCollection()
         {
+            using (FileStream fs = File.OpenRead(path))
+            {
+                fs.Seek(5, new SeekOrigin());
+                byte[] b = new byte[1024];
+                UTF8Encoding temp = new UTF8Encoding(true);
+                while (fs.Read(b, 0, b.Length) > 0)
+                {
+                    Console.WriteLine(temp.GetString(b));
+                }
+            }
             using StreamReader sr = new(Path);
             while (!sr.EndOfStream)
             {
@@ -211,8 +222,6 @@ namespace Block_7
             }
             Array.Resize(ref workArray, workArray.Length - 1);
             this.index--;
-            //workArray[index] = new Worker();
-            //SortCollection();
             Save();
         }
 
