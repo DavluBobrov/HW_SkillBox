@@ -47,12 +47,13 @@ class Programm
             // Поиск файлов в папке по названию и отправка
             if (System.IO.File.Exists(@$"{dir.FullName}\" + update.Message.Text))
             {
-                FileStream stream = System.IO.File.OpenRead(@$"{dir.FullName}\" +
+                using (FileStream stream = System.IO.File.OpenRead(@$"{dir.FullName}\" +
+                    update.Message.Text))
+                {
+                    InputOnlineFile inputOnlineFile = new InputOnlineFile(stream, @$"{dir.FullName}\" +
                     update.Message.Text);
-
-                InputOnlineFile inputOnlineFile = new InputOnlineFile(stream, @$"{dir.FullName}\" +
-                update.Message.Text);
-                await client.SendDocumentAsync(chatID, inputOnlineFile);
+                    await client.SendDocumentAsync(chatID, inputOnlineFile);
+                }
             }
             // Проверка типа присланного сообщения
             switch (update.Message.Type)
@@ -62,7 +63,7 @@ class Programm
                     switch (update.Message.Text)
                     {
                         case "/start":
-                            await client.SendTextMessageAsync(chatID, text: System.IO.File.ReadAllText("_start.txt"),
+                            await client.SendTextMessageAsync(chatID, text: System.IO.File.ReadAllText(@"..\..\..\_start.txt"),
                                                               cancellationToken: cToken);
                             break;
                         case "/download":
@@ -108,16 +109,14 @@ class Programm
         async void DownLoad(string fileId, string path)
         {
             var file = await client.GetFileAsync(fileId);
-            FileStream fs = new FileStream(path, FileMode.Create);
-            await client.DownloadFileAsync(file.FilePath, fs);
-            fs.Close();
-
-            fs.Dispose();
+            using FileStream fs = new FileStream(path, FileMode.Create);
+            {
+                await client.DownloadFileAsync(file.FilePath, fs);
+            }
         }
     }
 
     async static Task ErrorHandler(ITelegramBotClient arg1, Exception arg2, CancellationToken arg3)
     {
-        throw new NotImplementedException();
     }
 }
