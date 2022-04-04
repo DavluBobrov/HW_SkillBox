@@ -2,6 +2,20 @@
 # Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
 ################################################################################
 
-*.cache
-*.json
-*.props
+backup/
+obj/
+bin/
+*.exe*
+*.pdb
+*.rar
+.vs/
+Release/
+*.user
+/Rou_model/bin/Debug/history.dat
+/Rou_model/bin/Debug/params.dat
+/Rou_model/bin/Debug/OperandsFormat_newIterator.xml
+/Rou_model/SIMPRA_Cap_Editor_source.cs
+/.gitattributes
+/packages
+/SimpraCLI/Properties/launchSettings.json
+
