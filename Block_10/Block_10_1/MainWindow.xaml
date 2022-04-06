@@ -34,18 +34,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Menu Height="25" VerticalAlignment="Center" Grid.ColumnSpan="4">
+        <Menu Height="auto" VerticalAlignment="Center" Grid.ColumnSpan="4">
             <MenuItem Header="File" >
                 <MenuItem Header="Serialize Messege Log" Click="SerialazeMessLog" ></MenuItem>
-                <MenuItem Header="Open Project" >
-                    <MenuItem Header="WinForms"></MenuItem>
-                    <MenuItem Header="WPF" ></MenuItem>
-                </MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" ></MenuItem>
             </MenuItem>
-            <MenuItem Header="Edit" ></MenuItem>
-            <MenuItem Header="View" ></MenuItem>
         </Menu>
         <Grid Grid.Row="1" Grid.Column="2" ShowGridLines="True" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>

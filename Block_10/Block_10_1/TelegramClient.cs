@@ -130,7 +130,7 @@ namespace Block_10_1
                         textlog = "Send file: " + update.Message.Audio.FileName;
                         break;
                     case MessageType.Voice:
-                        DownLoad(update.Message.Voice.FileId, @$"{dir.FullName}\" + $"Voice_{DateTime.Now.ToString().Replace(':','_')}",
+                        DownLoad(update.Message.Voice.FileId, @$"{dir.FullName}\" + $"Voice_{DateTime.Now.ToString().Replace(':', '_')}",
                             update.Message.Voice.FileSize, update, cts, files);
                         textlog = "Send file: " + update.Message.Voice.FileId;
                         break;
@@ -157,20 +157,18 @@ namespace Block_10_1
         {
             if (fileSize <= 20 * 1000000)
             {
-                
+
                 var file = await client.GetFileAsync(fileId);
                 int i = 1;
-                while (System.IO.File.Exists(path))
-                {
-                    //TODO: Исправить багу на переименование файла.
-                    // https://www.cyberforum.ru/csharp-beginners/thread2151898.html
-                    path += $"({i})";
-                }
+                //TODO: Исправить багу на переименование файла.
+                // https://www.cyberforum.ru/csharp-beginners/thread2151898.html
+                path = IfSameFileName(path);
 
                 using (FileStream fs = new FileStream(path, FileMode.Create))
                 {
                     await client.DownloadFileAsync(file.FilePath, fs);
                 }
+                Thread.Sleep(100);
             }
             else
             {
@@ -178,6 +176,42 @@ namespace Block_10_1
                                                           text: "Максимальный размер файла не должен превышать 20МБ",
                                                           replyToMessageId: update.Message.MessageId,
                                                           cancellationToken: cts);
+            }
+        }
+
+        string IfSameFileName(string path)
+        {
+            if (System.IO.File.Exists(path))
+            {
+                string name = Path.GetFileNameWithoutExtension(path) + "(1)";
+                uint i = 0;
+                while (true)
+                {
+                    i++;
+                    //var b = name.Contains($"({i})");
+                    var newname = $"{name[0..^3]}({i}){Path.GetExtension(path)}";
+                        if (System.IO.File.Exists($"{Path.GetDirectoryName(path)}\\{name[0..^3]}({i}){Path.GetExtension(path)}"))
+                    //if (name.Substring(name.Length - 3) == $"({++i})")
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        //name[name.Length - 2] = i;
+                        //name = name[0..^4] + $"({i})";
+                        //if (i != 1)
+                            name = name.Substring(0, name.Length - 3) + $"({i})";
+                        //else
+                        //    name = name + $"({i})";
+                        return $"{Path.GetDirectoryName(path)}\\{name}{Path.GetExtension(path)}";
+
+                    }
+                }
+            }
+            else
+            {
+                //Такого файла не существует в конечной папке, можно копировать
+                return path; //Переместить файл
             }
         }
 
@@ -189,7 +223,7 @@ namespace Block_10_1
         public void SendMessege(ChatId chatID, string res, CancellationToken cts, Update updateClientMes)
         {
             client.SendTextMessageAsync(chatID,
-                                  text: res, 
+                                  text: res,
                                   replyToMessageId: updateClientMes.Message.MessageId,
                                   cancellationToken: cts
                                   );
