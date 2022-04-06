@@ -16,3 +16,4 @@ Release/
 /packages
 /SimpraCLI/Properties/launchSettings.json
 
+*.zip
