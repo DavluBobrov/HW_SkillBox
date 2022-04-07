@@ -37,7 +37,7 @@ namespace Block_10_1
             if (LogList.SelectedItem != null && !string.IsNullOrEmpty(mess))
             {
                 MessageLog clientMes = (LogList.SelectedItem as MessageLog);
-                client.SendMessege(clientMes.ChatID, mess, clientMes.Token, clientMes.UpdateClientMes);
+                client.SendMessege(clientMes.ChatID, mess, clientMes.Token, clientMes.UpdateClientMes.Message.MessageId);
             }
         }
 
@@ -46,6 +46,7 @@ namespace Block_10_1
             TextBlock_ChatID.Text = (LogList.SelectedItem as MessageLog).ChatID.ToString();
         }
 
+
         private void SerialazeMessLog(object sender, RoutedEventArgs e)
         {
             var options = new JsonSerializerOptions
@@ -53,10 +54,15 @@ namespace Block_10_1
                 WriteIndented = true
             };
             string jsonString = System.Text.Json.JsonSerializer.Serialize(LogList.ItemsSource, options: options);
-            using (StreamWriter sw = new StreamWriter("MessLog.json"))
+            using (StreamWriter sw = new StreamWriter("MessLog.json", true))
             {
                 sw.WriteLine(jsonString);
             }
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
 
     }
