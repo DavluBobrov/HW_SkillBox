@@ -1,19 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 //using Newtonsoft.Json;
 
 namespace Block_10_1
@@ -23,7 +13,8 @@ namespace Block_10_1
     /// </summary>
     public partial class MainWindow : Window
     {
-        TelegramClient client;
+        private TelegramClient client;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,7 +37,6 @@ namespace Block_10_1
             TextBlock_ChatID.Text = (LogList.SelectedItem as MessageLog).ChatID.ToString();
         }
 
-
         private void SerialazeMessLog(object sender, RoutedEventArgs e)
         {
             var options = new JsonSerializerOptions
@@ -64,6 +54,5 @@ namespace Block_10_1
         {
             this.Close();
         }
-
     }
 }

@@ -1,11 +1,10 @@
 ﻿using System;
 
-
 namespace Block_4_3
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Console.WriteLine("Игра \"Угадай-ка\"");
             Console.WriteLine("Введите до какого числа гадаем (начинается с нуля)");

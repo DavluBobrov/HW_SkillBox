@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace Block_8_4
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Введите ФИО;");
             XElement Header = new XElement("Person", new XAttribute("name", Console.ReadLine()));
             Console.WriteLine("Введите Улицу");
-            XElement Address = new XElement("Address", new XElement("Street",Console.ReadLine()));
+            XElement Address = new XElement("Address", new XElement("Street", Console.ReadLine()));
             Console.WriteLine("Введите номер дома");
             Address.Add(new XElement("HouseNumber", Console.ReadLine()));
             Console.WriteLine("Введите номер квартиры");

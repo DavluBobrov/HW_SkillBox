@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -15,20 +12,21 @@ using Telegram.Bot.Types.InputFiles;
 
 namespace Block_10_1
 {
-    class TelegramClient
+    internal class TelegramClient
     {
         private MainWindow w;
 
-        TelegramBotClient client;
+        private TelegramBotClient client;
 
         public ObservableCollection<MessageLog> MsLogCollect { get; set; }
 
         protected CancellationTokenSource cts = new CancellationTokenSource();
 
-        ReceiverOptions receiverOptions = new ReceiverOptions
+        private ReceiverOptions receiverOptions = new ReceiverOptions
         {
             AllowedUpdates = { } // receive all update types
         };
+
         //private ChatId chatID;
 
         public TelegramClient(MainWindow W)
@@ -50,12 +48,16 @@ namespace Block_10_1
                 var chatID = update.Message.Chat.Id;
                 var Name = update.Message.Chat.Username;
                 string textlog = string.Empty;              // Лог во вью
+
                 #region Создание папки для пользователя и получение списка файлов
+
                 System.IO.DirectoryInfo dir = new DirectoryInfo($@"download\{Name}");
                 if (!dir.Exists)
                     dir.Create();
                 var files = dir.GetFiles();
-                #endregion
+
+                #endregion Создание папки для пользователя и получение списка файлов
+
                 // Мониторинг работы бота в консоли
                 Debug.WriteLine($"Chat ID = {chatID}, {Name} write: {update.Message.Text}  Type: {update.Message.Type}");
                 // Поиск файлов в папке по названию и отправка
@@ -84,6 +86,7 @@ namespace Block_10_1
                                                                   cancellationToken: cts);
                                 textlog = update.Message.Text;
                                 break;
+
                             case "/download":
                                 string res = string.Empty;
                                 foreach (var n in files)
@@ -96,14 +99,17 @@ namespace Block_10_1
                                                                   cancellationToken: cts);
                                 textlog = update.Message.Text;
                                 break;
+
                             default: textlog = update.Message.Text; break;
                         }
                         break;
+
                     case MessageType.Document:
                         DownLoad(update.Message.Document.FileId, @$"{dir.FullName}\" + update.Message.Document.FileName,
                             update.Message.Document.FileSize, update, cts);
                         textlog = "Send file: " + update.Message.Document.FileName;
                         break;
+
                     case MessageType.Photo:
                         var test = client.GetFileAsync(update.Message.Photo[update.Message.Photo.Length - 1].FileId);
                         string[] imagepath = test.Result.FilePath.Split('/');
@@ -119,29 +125,33 @@ namespace Block_10_1
                             update.Message.Photo[update.Message.Photo.Length - 1].FileSize, update, cts);
                         textlog = "Send file: " + newImagePath;
                         break;
+
                     case MessageType.Video:
                         string name = string.IsNullOrEmpty(update.Message.Video.FileName) ? "video" : update.Message.Video.FileName;
                         DownLoad(update.Message.Video.FileId, @$"{dir.FullName}\" + name,
                             update.Message.Video.FileSize, update, cts);
                         textlog = "Send file: " + update.Message.Video.FileName;
                         break;
+
                     case MessageType.Audio:
                         DownLoad(update.Message.Audio.FileId, @$"{dir.FullName}\" + update.Message.Audio.FileName,
                             update.Message.Audio.FileSize, update, cts);
                         textlog = "Send file: " + update.Message.Audio.FileName;
                         break;
+
                     case MessageType.Voice:
                         DownLoad(update.Message.Voice.FileId, @$"{dir.FullName}\" + $"Voice_{DateTime.Now.ToString().Replace(':', '_')}",
                             update.Message.Voice.FileSize, update, cts);
                         textlog = "Send file: " + update.Message.Voice.FileId;
                         break;
+
                     default:
                         break;
                 }
                 string text = $"{DateTime.Now.ToLongTimeString()}: {update.Message.Chat.FirstName} {update.Message.Chat.Id} {update.Message.Text}";
 
                 Debug.WriteLine($"{text} TypeMessage: {update.Message.Type.ToString()}");
-                
+
                 w.Dispatcher.Invoke(() =>
                {
                    MsLogCollect.Add(
@@ -158,7 +168,7 @@ namespace Block_10_1
         /// <param name="fileSize">размер файла</param>
         /// <param name="update"></param>
         /// <param name="cts">Токен отмены</param>
-        async void DownLoad(string fileId, string path, int? fileSize, Update update, CancellationToken cts)
+        private async void DownLoad(string fileId, string path, int? fileSize, Update update, CancellationToken cts)
         {
             if (fileSize <= 20 * 1000000)                               // Проверка, что файл меньше 20МБ
             {
@@ -185,7 +195,7 @@ namespace Block_10_1
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        string IfSameFileName(string path)
+        private string IfSameFileName(string path)
         {
             if (System.IO.File.Exists(path))
             {
@@ -234,6 +244,5 @@ namespace Block_10_1
                                   cancellationToken: cts
                                   );
         }
-
     }
 }

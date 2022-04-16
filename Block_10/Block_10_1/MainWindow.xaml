@@ -8,34 +8,33 @@
         Title="BobruiskFM" Height="450" Width="800" MinHeight="350" MinWidth="600">
     <Grid ShowGridLines="True" RenderTransformOrigin="0.486,0.505">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" MinHeight="25"/>
-            <RowDefinition Height="*" MinHeight="200"/>
+            <RowDefinition Height="25" MinHeight="25" />
+            <RowDefinition Height="*" MinHeight="200" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="299*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="432*" MinWidth="400"/>
+            <ColumnDefinition Width="299*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="432*" MinWidth="400" />
         </Grid.ColumnDefinitions>
-        <GridSplitter Grid.Column="1" Grid.Row="1" Width="3" 
-                      Background="#FF170F0F" 
+        <GridSplitter Grid.Column="1" Grid.Row="1" Width="3"
+                      Background="#FF170F0F"
                       HorizontalAlignment="Center"
-                      ResizeDirection="Auto"
-                      />
-        
-        <ListBox x:Name="LogList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" 
+                      ResizeDirection="Auto" />
+
+        <ListBox x:Name="LogList" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1"
                  SelectionChanged="LogList_SelectionChanged" SelectionMode="Single" Grid.ColumnSpan="2" Margin="0,0,3,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding StringFormat=NickName: {0}, Path=FirstName}" Margin="0" FontSize="15"/>
-                        <TextBlock Text="{Binding Msg}" Margin="0" FontSize="20"/>
-                        <TextBlock Text="{Binding Time}" Margin="10 0" FontSize="10" Foreground="Gray" TextAlignment="Right"/>
+                        <TextBlock Text="{Binding StringFormat=NickName: {0}, Path=FirstName}" Margin="0" FontSize="15" />
+                        <TextBlock Text="{Binding Msg}" Margin="0" FontSize="20" />
+                        <TextBlock Text="{Binding Time}" Margin="10 0" FontSize="10" Foreground="Gray" TextAlignment="Right" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <Menu Height="auto" VerticalAlignment="Center" Grid.ColumnSpan="4">
-            <MenuItem Header="File" >
+            <MenuItem Header="File">
                 <MenuItem Header="Serialize Messege Log" Click="SerialazeMessLog" ></MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" Click="Exit"></MenuItem>
@@ -58,14 +57,14 @@
             <TextBlock x:Name ="TextBlock_ChatID"
                        Grid.Column="1" Grid.Row="0"
                        Margin="10" Padding="5"
-                       FontSize="15" 
+                       FontSize="15"
                        Background="LightGray"></TextBlock>
             <RichTextBox x:Name="MessUpload"
                          Margin="10" Grid.Row="1" Grid.ColumnSpan="3" Padding="5"
                          VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"
                          FontFamily="Georgia" FontSize="25">
                 <RichTextBox.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect />
                 </RichTextBox.Effect>
             </RichTextBox>
             <!--<Rectangle Grid.Column="2" Grid.Row="0" Margin="10" OpacityMask="#FF831111" Stroke="#FF0A0707" Fill="#FFB6AFAF">
@@ -73,8 +72,8 @@
                     <MouseBinding Command="{Binding ...ляля}" MouseAction="LeftClick"></MouseBinding>
    </Rectangle.InputBindings>--><!--
             </Rectangle>-->
-            <Button Grid.Column="2" Grid.Row="0" Margin="10" Padding="5" 
-                    Content="Отправка сообщения" 
+            <Button Grid.Column="2" Grid.Row="0" Margin="10" Padding="5"
+                    Content="Отправка сообщения"
                     Click="Button_Click"
                     MinHeight="30" />
         </Grid>

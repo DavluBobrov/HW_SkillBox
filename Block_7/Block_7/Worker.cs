@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Block_7
 {
-    struct Worker
+    internal struct Worker
     {
         #region Свойства полей
+
         public int ID { get; }
         public int Age { get; }
         public int Heigth { get; }
@@ -16,7 +13,8 @@ namespace Block_7
         public string BirthPlace { get; }
         public DateTime DateAdd { get; }
         public DateTime DateOfBirth { get; }
-        #endregion
+
+        #endregion Свойства полей
 
         /// <summary>
         /// Конструктор для добавления НОВОГО сотрудника

@@ -3,9 +3,9 @@ using static System.Console;
 
 namespace Block_3_2
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             WriteLine("Приветствую тебя, Игрок. \nСколько карт у тебя на руках?");
             while (true)
@@ -16,7 +16,7 @@ namespace Block_3_2
                 if (is_number)                                                  // Проверка на то, что введено именно число
                 {
                     // Введено число, выводим что требуется
-                    WriteLine("Введите поочередно Ваши карты:");                                              
+                    WriteLine("Введите поочередно Ваши карты:");
                     for (int i = 1; i <= count; i++)
                     {
                         WriteLine($"{i}-ая карта:");
@@ -29,7 +29,7 @@ namespace Block_3_2
                             case "J": sum += 10; break;
                             default:
                                 is_number = Int32.TryParse(card, out int card_number);      // Флаг проверки на введенные данные
-                                if (is_number && card_number > 1 && card_number < 11)       // Если введено число, то сразу проверяем диапазон чисел (возможных карт)  
+                                if (is_number && card_number > 1 && card_number < 11)       // Если введено число, то сразу проверяем диапазон чисел (возможных карт)
                                 {
                                     sum += card_number;
                                 }
@@ -52,7 +52,6 @@ namespace Block_3_2
                     WriteLine("Данные введены неверно! Укажите количество карт цифрами");
                 }
             }
-
         }
     }
 }

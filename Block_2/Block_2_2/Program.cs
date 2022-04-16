@@ -1,11 +1,10 @@
-﻿using System;
-using static System.Console;
+﻿using static System.Console;
 
 namespace Block_2_1
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Данные студента
             string FullName = "Пупкин Василий Ололоевич";

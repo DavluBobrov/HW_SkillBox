@@ -3,11 +3,11 @@ using static System.Console;
 
 namespace Block_5_2
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
-            WriteLine("Введите любой текст через пробел:"); 
+            WriteLine("Введите любой текст через пробел:");
             string input_text = ReadLine();
             ReverseWords(input_text);
             ReadKey();
@@ -18,7 +18,7 @@ namespace Block_5_2
         /// </summary>
         /// <param name="text_to_split">Строка для ввода</param>
         /// <returns>Возвращает массив слов</returns>
-        static string[] SplitTextInArray(string text_to_split)
+        private static string[] SplitTextInArray(string text_to_split)
         {
             return text_to_split.Split(' ');
         }
@@ -27,7 +27,7 @@ namespace Block_5_2
         /// Метод перестановки слов наоборот
         /// </summary>
         ///
-        static void ReverseWords(string inputPhrase)
+        private static void ReverseWords(string inputPhrase)
         {
             string[] arr = SplitTextInArray(inputPhrase);
             Array.Reverse(arr);
@@ -38,7 +38,7 @@ namespace Block_5_2
         /// Метод печати массива слов на каждой строке
         /// </summary>
         /// <param name="arr">Входной массив слов</param>
-        static void PrintArrayWords(string[] arr)
+        private static void PrintArrayWords(string[] arr)
         {
             foreach (var arg in arr)
             {

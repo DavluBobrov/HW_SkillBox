@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
 using Telegram.Bot.Types;
 
 namespace Block_10_1
 {
-    class MessageLog
+    internal class MessageLog
     {
         public string Time { get; }
 
-        public long ChatID { get;  }
+        public long ChatID { get; }
 
         public string Msg { get; }
 

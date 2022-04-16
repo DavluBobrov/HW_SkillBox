@@ -3,9 +3,9 @@ using static System.Console;
 
 namespace Block_3_3
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Запрос пользователю
             while (true)

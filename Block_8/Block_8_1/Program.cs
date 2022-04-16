@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace Block_8_1
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             List<int> Numbers = new List<int>();
             FillList(ref Numbers);
@@ -18,7 +17,7 @@ namespace Block_8_1
             Console.ReadKey();
         }
 
-        static void FillList(ref List<int> list)
+        private static void FillList(ref List<int> list)
         {
             Random r = new Random();
             for (int i = 0; i < 100; i++)
@@ -27,7 +26,7 @@ namespace Block_8_1
             }
         }
 
-        static void PrintList(List<int> list)
+        private static void PrintList(List<int> list)
         {
             for (int i = 0; i < list.Count; i++)
             {
@@ -36,7 +35,7 @@ namespace Block_8_1
             }
         }
 
-        static void RemoveElements(ref List<int> list)
+        private static void RemoveElements(ref List<int> list)
         {
             for (int i = 0; i < list.Count; i++)
             {
@@ -46,7 +45,6 @@ namespace Block_8_1
                     i--;
                 }
             }
-
         }
     }
 }

@@ -1,20 +1,12 @@
-﻿using Microsoft.Exchange.WebServices.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Block_11_1
+﻿namespace Block_11_1
 {
-    class Client
+    internal class Client
     {
-        string _lastName;
-        string _firstName;
-        string _patronymic;
-        string _phoneNumber;
-        Passport _passportData;
-        PhoneCall phoneCall;
+        private string _lastName;
+        private string _firstName;
+        private string _patronymic;
+        private string _phoneNumber;
+        private Passport _passportData;
 
         public Client()
         {
@@ -22,11 +14,17 @@ namespace Block_11_1
 
         public Client(string lastName, string firstName, string patronymic, string phoneNumber, Passport passportData)
         {
-            _lastName = lastName;
-            _firstName = firstName;
-            _patronymic = patronymic;
-            _phoneNumber = phoneNumber;
-            _passportData = passportData;
+            LastName = lastName;
+            FirstName = firstName;
+            Patronymic = patronymic;
+            PhoneNumber = phoneNumber;
+            PassportData = passportData;
         }
+
+        public string LastName { get => _lastName; set => _lastName = value; }
+        public string FirstName { get => _firstName; set => _firstName = value; }
+        public string Patronymic { get => _patronymic; set => _patronymic = value; }
+        public string PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
+        internal Passport PassportData { get => _passportData; set => _passportData.ToString(); }
     }
 }

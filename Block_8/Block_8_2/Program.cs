@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Block_8_2
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Dictionary<string, string> PhoneBook = new Dictionary<string, string>();
             FillDictionary(ref PhoneBook);
@@ -14,7 +14,7 @@ namespace Block_8_2
             Console.ReadKey();
         }
 
-        static void FillDictionary(ref Dictionary<string,string> phonebook)
+        private static void FillDictionary(ref Dictionary<string, string> phonebook)
         {
             do
             {
@@ -28,7 +28,7 @@ namespace Block_8_2
             } while (true);
         }
 
-        static void UserSearch(Dictionary<string, string> phonebook)
+        private static void UserSearch(Dictionary<string, string> phonebook)
         {
             while (true)
             {

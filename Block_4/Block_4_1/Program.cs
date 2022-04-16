@@ -3,9 +3,9 @@ using static System.Console;
 
 namespace Block_4_1
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             try
             {

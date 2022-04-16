@@ -1,11 +1,10 @@
-﻿using System;
-using static System.Console;
+﻿using static System.Console;
 
 namespace Block_5_1
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             WriteLine("Введите любой текст через пробел:");
             //PrintArrayWords(SplitTextInArray(ReadLine()));
@@ -13,14 +12,14 @@ namespace Block_5_1
             string[] split_data = SplitTextInArray(data);
             PrintArrayWords(split_data);
             ReadKey();
-        } 
+        }
 
         /// <summary>
         /// Метод разбиения строки тества в массив
         /// </summary>
         /// <param name="text_to_split">Строка для ввода</param>
         /// <returns></returns>
-        static string[] SplitTextInArray(string text_to_split)
+        private static string[] SplitTextInArray(string text_to_split)
         {
             return text_to_split.Split(' ');
         }
@@ -29,7 +28,7 @@ namespace Block_5_1
         /// Метод печати массива слов на каждой строке
         /// </summary>
         /// <param name="arr">Входной массив слов</param>
-        static void PrintArrayWords(string[] arr)
+        private static void PrintArrayWords(string[] arr)
         {
             foreach (var arg in arr)
             {

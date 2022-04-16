@@ -5,11 +5,11 @@ using static System.Console;
 
 namespace Block_7
 {
-    struct CollectionDir
+    internal struct CollectionDir
     {
-        int index;
-        readonly string path;
-        Worker[] workArray;
+        private int index;
+        private readonly string path;
+        private Worker[] workArray;
 
         int Count { get { return index + 1; } }
         int MaxID { get; set; }
@@ -31,7 +31,7 @@ namespace Block_7
         /// <summary>
         /// Инициализация Коллекции
         /// </summary>
-        void InitCollection()
+        private void InitCollection()
         {
             using (FileStream fs = File.OpenRead(path))
             {
@@ -56,7 +56,9 @@ namespace Block_7
                 }
             }
         }
+
         #region Public Methods
+
         /// <summary>
         /// Индексатор
         /// </summary>
@@ -157,7 +159,9 @@ namespace Block_7
             int ID = MaxID + 1;
             MaxID++;
             string FullName = "";
+
             #region Data Input
+
             Console.Write("Введите Имя: ");
             FullName += $"{ReadLine()} ";
             Console.Write("Введите Фамилию: ");
@@ -170,7 +174,9 @@ namespace Block_7
             DateTime DateОfBirth = DateTime.Parse(ReadLine());
             Console.Write("Введите Место рождения: ");
             string birthPlace = ReadLine();
-            #endregion
+
+            #endregion Data Input
+
             Worker w = new(ID, heigth, FullName, birthPlace, DateОfBirth);
 
             //int age = (dateAdd - DateОfBirth).Days / 365;        // Вычисление возраста
@@ -190,7 +196,9 @@ namespace Block_7
             GetWorker(ID, out int i);
 
             string FullName = "";
+
             #region Data Input
+
             Console.Write("Введите Имя: ");
             FullName += $"{ReadLine()} ";
             Console.Write("Введите Фамилию: ");
@@ -203,7 +211,9 @@ namespace Block_7
             DateTime DateОfBirth = DateTime.Parse(ReadLine());
             Console.Write("Введите Место рождения: ");
             string birthPlace = ReadLine();
-            #endregion
+
+            #endregion Data Input
+
             Worker w = new(ID, heigth, FullName, birthPlace, DateОfBirth);
             workArray[i] = w;
         }
@@ -216,7 +226,7 @@ namespace Block_7
         {
             //string newText = string.Empty;
             GetWorker(ID, out int index);
-            for (int i = index; i < Count-1; i++)
+            for (int i = index; i < Count - 1; i++)
             {
                 workArray[i] = workArray[i + 1];
             }
@@ -238,15 +248,17 @@ namespace Block_7
                     PrintWorker(w);
             }
         }
-        #endregion
+
+        #endregion Public Methods
 
         #region static Methods
+
         /// <summary>
         /// Преобразования данных сотрудника в строку
         /// </summary>
         /// <param name="w">структура Worker</param>
         /// <returns>Возвращает преобразованные данные в виде строки с разделителями # для добавления в справочник</returns>
-        static string WorkerToString(Worker w)
+        private static string WorkerToString(Worker w)
         {
             return $"{w.ID}#{w.DateAdd.ToShortDateString()} {w.DateAdd.ToShortTimeString()}" +
                    $"#{w.FullName}#{w.Age}#{w.Heigth}#{w.DateOfBirth.ToShortDateString()}#{w.BirthPlace}";
@@ -257,19 +269,21 @@ namespace Block_7
         /// </summary>
         /// <param name="str">Массив слов</param>
         /// <returns>Возвращает данные в виде структуры Worker для добавления в коллекцию</returns>
-        static Worker ParserLineFile(string[] str)
+        private static Worker ParserLineFile(string[] str)
         {
             return new Worker(Int32.Parse(str[0]), DateTime.Parse((str[1])), str[2],
                 Int32.Parse(str[3]), Int32.Parse(str[4]), DateTime.Parse(str[5]), str[6]);
         }
-        #endregion
+
+        #endregion static Methods
 
         #region private Methods
+
         /// <summary>
         /// Метод присваивания максимального ID
         /// </summary>
         /// <param name="id">Сравниваемый ID с максимальным</param>
-        void FindMaxID(int id)
+        private void FindMaxID(int id)
         {
             MaxID = (id > MaxID) ? id : MaxID;
         }
@@ -278,7 +292,7 @@ namespace Block_7
         /// Увеличение размера коллекции
         /// </summary>
         /// <param name="flag">Требование увеличение</param>
-        void Resize(bool flag)
+        private void Resize(bool flag)
         {
             if (flag) Array.Resize(ref workArray, workArray.Length + 1);
         }
@@ -287,7 +301,7 @@ namespace Block_7
         /// Добавление Данных сотрудника в коллекцию
         /// </summary>
         /// <param name="worker">Структура Worker</param>
-        void AddWorkerInCollection(Worker worker)
+        private void AddWorkerInCollection(Worker worker)
         {
             this.index++;
             this.Resize(index >= this.workArray.Length);
@@ -300,7 +314,7 @@ namespace Block_7
         /// <param name="ID">ID сотрудника</param>
         /// <param name="index">индекс в коллекции</param>
         /// <returns>Возвращает структурированные данные сотрудника Worker</returns>
-        Worker GetWorker(int ID, out int index)
+        private Worker GetWorker(int ID, out int index)
         {
             index = -1;
             for (int i = 0; i < Count; i++)
@@ -313,6 +327,7 @@ namespace Block_7
             }
             return new Worker();
         }
-        #endregion
+
+        #endregion private Methods
     }
 }

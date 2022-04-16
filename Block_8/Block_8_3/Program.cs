@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Block_8_3
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             HashSet<int> vs = new HashSet<int>();
             Console.WriteLine("Введите число для добавления в коллекцию");

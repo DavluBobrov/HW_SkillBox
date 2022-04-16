@@ -8,12 +8,12 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.InputFiles;
 
-class Programm
+internal class Programm
 {
     //private static string token { get; set; } = "5232639348:AAE8zMwAtLSiE0EfD2alL7R4oM4oeEUcmKE";
-    static TelegramBotClient client = new TelegramBotClient("5232639348:AAE8zMwAtLSiE0EfD2alL7R4oM4oeEUcmKE");
+    private static TelegramBotClient client = new TelegramBotClient("5232639348:AAE8zMwAtLSiE0EfD2alL7R4oM4oeEUcmKE");
 
-    static void Main()
+    private static void Main()
     {
         var cts = new CancellationTokenSource();
 
@@ -28,18 +28,22 @@ class Programm
         Console.ReadLine();
     }
 
-    async static Task OnMassageHandler(ITelegramBotClient client, Update update, CancellationToken cToken)
+    private static async Task OnMassageHandler(ITelegramBotClient client, Update update, CancellationToken cToken)
     {
         if (update.Type == UpdateType.Message)
         {
             var chatID = update.Message.Chat.Id;
             var Name = update.Message.Chat.Username;
+
             #region Создание папки для пользователя и получение списка файлов
+
             System.IO.DirectoryInfo dir = new DirectoryInfo($@"download\{Name}");
             if (!dir.Exists)
                 dir.Create();
             var files = dir.GetFiles();
-            #endregion
+
+            #endregion Создание папки для пользователя и получение списка файлов
+
             // Мониторинг работы бота в консоли
             Console.WriteLine($"Chat ID = {update.Message.Chat.Id}, {Name} write: {update.Message.Text}  Type: {update.Message.Type}");
             // Поиск файлов в папке по названию и отправка
@@ -64,6 +68,7 @@ class Programm
                             await client.SendTextMessageAsync(chatID, text: System.IO.File.ReadAllText(@"..\..\..\_start.txt"),
                                                               cancellationToken: cToken);
                             break;
+
                         case "/download":
                             string res = string.Empty;
                             foreach (var n in files)
@@ -77,9 +82,11 @@ class Programm
                             break;
                     }
                     break;
+
                 case MessageType.Document:
                     DownLoad(update.Message.Document.FileId, @$"{dir.FullName}\" + update.Message.Document.FileName);
                     break;
+
                 case MessageType.Photo:
                     var test = client.GetFileAsync(update.Message.Photo[update.Message.Photo.Length - 1].FileId);
                     string[] imagepath = test.Result.FilePath.Split('/');
@@ -93,12 +100,15 @@ class Programm
                                                       cancellationToken: cToken);
                     DownLoad(update.Message.Photo[update.Message.Photo.Length - 1].FileId, @$"{dir.FullName}\" + newImagePath);
                     break;
+
                 case MessageType.Video:
                     DownLoad(update.Message.Video.FileId, @$"{dir.FullName}\" + update.Message.Video.FileName);
                     break;
+
                 case MessageType.Audio:
                     DownLoad(update.Message.Document.FileId, @$"{dir.FullName}\" + update.Message.Audio.FileName);
                     break;
+
                 default:
                     break;
             }
@@ -114,7 +124,7 @@ class Programm
         }
     }
 
-    async static Task ErrorHandler(ITelegramBotClient arg1, Exception arg2, CancellationToken arg3)
+    private static async Task ErrorHandler(ITelegramBotClient arg1, Exception arg2, CancellationToken arg3)
     {
     }
 }

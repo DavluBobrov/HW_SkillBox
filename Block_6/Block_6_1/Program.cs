@@ -4,9 +4,9 @@ using static System.Console;
 
 namespace Block_6_1
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Console.WriteLine("Выберите действие:");
             Console.WriteLine("1. Вывод справочника на экран:");
@@ -27,7 +27,7 @@ namespace Block_6_1
         /// Вывод справочника на экран
         /// </summary>
         /// <param name="path">Путь до Справочника</param>
-        static void PrintDyrectory(string dirPath)
+        private static void PrintDyrectory(string dirPath)
         {
             if (File.Exists(dirPath))
             {
@@ -52,7 +52,7 @@ namespace Block_6_1
         /// Метод добавления нового сотрудника
         /// </summary>
         /// <param name="dirPath">Путь до Справочника</param>
-        static void AddMember(string dirPath)
+        private static void AddMember(string dirPath)
         {
             //1#20.12.2021 00:12#Иванов Иван Иванович#25#176#05.05.1992#город Москва
             int ID;
@@ -65,9 +65,11 @@ namespace Block_6_1
                 string[] allText = File.ReadAllLines(dirPath);
                 ID = allText.Length + 1;
             }
-            
+
             string FullName = "";
+
             #region Data Input
+
             Console.Write("Введите Имя: ");
             FullName += $"{ReadLine()} ";
             Console.Write("Введите Фамилию: ");
@@ -80,13 +82,14 @@ namespace Block_6_1
             DateTime DateОfBirth = DateTime.Parse(ReadLine());
             Console.Write("Введите Место рождения: ");
             string birthPlace = ReadLine();
-            #endregion
+
+            #endregion Data Input
+
             DateTime dateAdd = DateTime.Now;
             int age = (dateAdd - DateОfBirth).Days / 365;        // Вычисление возраста
             string addText = $"{ID}#{dateAdd.ToShortDateString()} {dateAdd.ToShortTimeString()}" +
                              $"#{FullName}#{age}#{height}#{DateОfBirth.ToShortDateString()}#{birthPlace}\n";
             File.AppendAllText(dirPath, addText);
         }
-
     }
 }
