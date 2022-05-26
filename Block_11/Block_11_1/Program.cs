@@ -2,11 +2,14 @@
 
 namespace Block_11_1
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Bank A = new();
+            Consultant Consul = new(A.ClientsForConsiltant);
+            Consul.PrintAllClients();
+            Console.ReadLine();
         }
     }
 }
