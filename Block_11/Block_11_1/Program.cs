@@ -7,7 +7,7 @@ namespace Block_11_1
         private static void Main(string[] args)
         {
             Bank A = new();
-            Consultant Consul = new(A.ClientsForConsiltant);
+            Consultant Consul = new(A.GetClientsForConsiltant());
             Consul.PrintAllClients();
             Console.ReadLine();
         }

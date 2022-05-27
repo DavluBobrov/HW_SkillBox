@@ -8,7 +8,7 @@ namespace Block_11_1
 {
     internal class Bank
     {
-        private static List<RealClient> _Clients = new List<RealClient>();
+        private static List<RealClient> _Clients = new();
 
         public Bank()
         {
@@ -17,17 +17,12 @@ namespace Block_11_1
 
         internal static List<RealClient> Clients { get => _Clients; set => _Clients = value; }
 
-
-
-        public List<Client> ClientsForConsiltant
+        public List<Client> GetClientsForConsiltant()
         {
-            get
-            {
-                List<Client> result = new();
-                result.AddRange(from item in Clients
-                                select new ProxyConsulClient(item));
-                return result;
-            }
+            List<Client> result = new();
+            result.AddRange(from item in Clients
+                            select new ProxyConsulClient(item));
+            return result;
         }
 
         private void FillClients()
