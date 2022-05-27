@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 
 namespace Block_11_1
 {
@@ -7,9 +10,51 @@ namespace Block_11_1
         private static void Main(string[] args)
         {
             Bank A = new();
-            Consultant Consul = new(A.GetClientsForConsiltant());
-            Consul.PrintAllClients();
-            Console.ReadLine();
+            while (true)
+            {
+                Console.WriteLine("Кто работает в программе? 1 - Консультант, 2 - Менеджер");
+                Consultant Employee = Console.ReadLine() switch
+                {
+                    "1" => new(A.GetClientsForConsiltant()),
+                    "2" => new Manager(A.GetClientsForManager()),
+                    _ => new Consultant(),
+                };
+                Console.Clear();
+                do
+                {
+                    Menu();
+                    switch (Console.ReadLine())
+                    {
+                        case "1": Employee.PrintAllClients(); break;
+                        case "2":
+                            Console.Write("Введите ID Клиента: ");
+                            Employee.PrintClient(int.Parse(Console.ReadLine()));
+                            break;
+
+                        case "3":
+                            Console.Write("Введите ID Клиента: ");
+                            Employee.Edit(int.Parse(Console.ReadLine()));
+                            break;
+
+                        case "4": A.SerialazeDataClients(); break;
+                        default:
+                            break;
+                    }
+                    Console.WriteLine("Продолжить исполнение программы? Д/Н");
+                } while (Console.ReadLine().ToUpper() == "Д");
+
+                //Employee.SerialazeDataClients();
+                Console.ReadLine();
+            }
+        }
+
+        private static void Menu()
+        {
+            Console.WriteLine("Выберите действие:");
+            Console.WriteLine("1 - Просмотр Всего списка клиентов");
+            Console.WriteLine("2 - Просмотр отдельного криента по ID");
+            Console.WriteLine("3 - Редактирование клиента по ID");
+            Console.WriteLine("4 - Сохранение Изменений в файл");
         }
     }
 }

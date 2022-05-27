@@ -8,7 +8,7 @@ namespace Block_11_1
 {
     internal class RealClient : Client
     {
-        private readonly int _iD;
+        private int _iD;
         private string _lastName;
         private string _firstName;
         private string _patronymic;
@@ -34,6 +34,6 @@ namespace Block_11_1
         public override string Patronymic { get => _patronymic; set => _patronymic = value; }
         public override string PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
         public override Passport PassportData { get => _passportData; set => _passportData = value; }
-        public override int ID { get => _iD; }
+        public override int ID { get => _iD; set => _iD = value; }
     }
 }

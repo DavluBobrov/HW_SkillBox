@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Block_11_1
 {
-    abstract class Client
+    internal abstract class Client
     {
         public abstract string LastName { get; set; }
         public abstract string FirstName { get; set; }
         public abstract string Patronymic { get; set; }
         public abstract string PhoneNumber { get; set; }
         public abstract Passport PassportData { get; set; }
-        public abstract int ID { get; }
+        public abstract int ID { get; set; }
 
         public override string ToString()
         {

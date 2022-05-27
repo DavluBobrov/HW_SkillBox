@@ -18,9 +18,9 @@ namespace Block_11_1
         public override string LastName { get => RClient.LastName; set => Console.WriteLine("Нет Доступа"); }
         public override string FirstName { get => RClient.FirstName; set => Console.WriteLine("Нет Доступа"); }
         public override string Patronymic { get => RClient.Patronymic; set => Console.WriteLine("Нет Доступа"); }
-        public override string PhoneNumber { get => RClient.PhoneNumber; set => EditTelephone(value); }
+        public override string PhoneNumber { get => RClient.PhoneNumber; set => RClient.PhoneNumber = EditTelephone(value); }
         public override Passport PassportData { get => new Passport(); set => Console.WriteLine("Нет Доступа"); }
-        public override int ID { get => RClient.ID; }
+        public override int ID { get => RClient.ID; set => Console.WriteLine("Нет Доступа"); }
 
         private string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"+7{newPhone}" : RClient.PhoneNumber;
     }
