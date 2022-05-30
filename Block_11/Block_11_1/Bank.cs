@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Block_11_1
 {
     internal class Bank
     {
         private static List<RealClient> _Clients = new();
-        private int _MaxID;
+        private static int _MaxID;
 
         public Bank()
         {
@@ -43,9 +41,31 @@ namespace Block_11_1
             return result;
         }
 
-        public static void AddNewClient(params string[] inpurDataClient)
+        /// <summary>
+        /// Добавление нового клиента в БД
+        /// </summary>
+        /// <param name="inputDataClient">
+        /// Входные данные: [0] - LastName [1] - FirstName [2] - Patronymic [3] - PhoneNumber
+        /// [4] - PassportData: series [5] - PassportData: number
+        /// </param>
+        public static Client AddNewClient(params string[] inputDataClient)
         {
-            _Clients.Add();
+            RealClient rCl = new()
+            {
+                LastName = inputDataClient[0],
+                FirstName = inputDataClient[1],
+                Patronymic = inputDataClient[2],
+                PhoneNumber = inputDataClient[3],
+                PassportData = new Passport
+                {
+                    Series = inputDataClient[4],
+                    Number = inputDataClient[5]
+                },
+                ID = _MaxID + 1
+            };
+            _Clients.Add(rCl);
+            _MaxID++;
+            return new ProxyManagerClient(rCl);
         }
 
         private void FillClients()

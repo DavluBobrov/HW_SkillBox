@@ -23,6 +23,8 @@ namespace Block_11_1
                 do
                 {
                     Menu();
+                    if (Employee is Manager) Console.WriteLine("5 - Добавление нового клиента в БД");
+
                     switch (Console.ReadLine())
                     {
                         case "1": Employee.PrintAllClients(); break;
@@ -37,6 +39,15 @@ namespace Block_11_1
                             break;
 
                         case "4": A.SerialazeDataClients(); break;
+                        case "5":
+                            if (Employee is Manager)
+                            {
+                                Console.WriteLine("Введите данные через пробел по порядку в виде:");
+                                Console.WriteLine("Фамилия Имя Отчество Номертелефона(без +7 или 8) СерияПаспорта НомерПаспорта");
+                                (Employee as Manager).AddNewClient(Console.ReadLine().Split(' '));
+                            }
+                            break;
+
                         default:
                             break;
                     }

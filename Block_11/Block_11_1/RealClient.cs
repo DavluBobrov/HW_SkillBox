@@ -32,7 +32,7 @@ namespace Block_11_1
         public override string LastName { get => _lastName; set => _lastName = value; }
         public override string FirstName { get => _firstName; set => _firstName = value; }
         public override string Patronymic { get => _patronymic; set => _patronymic = value; }
-        public override string PhoneNumber { get => _phoneNumber; set => _phoneNumber = value; }
+        public override string PhoneNumber { get => _phoneNumber; set => _phoneNumber = EditTelephone(value); }
         public override Passport PassportData { get => _passportData; set => _passportData = value; }
         public override int ID { get => _iD; set => _iD = value; }
     }

@@ -19,5 +19,7 @@ namespace Block_11_1
         {
             return $"{ID,4} {LastName,10} {FirstName,10} {Patronymic,15} {PhoneNumber,13} {PassportData,13}";
         }
+
+        protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"+7{newPhone}" : this.PhoneNumber;
     }
 }

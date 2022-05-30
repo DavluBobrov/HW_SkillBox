@@ -12,10 +12,9 @@ namespace Block_11_1
         {
         }
 
-        public void AddNewClient(Client newClient)
+        public void AddNewClient(string[] inputData)
         {
-            string[] str = new string[2];
-            Bank.AddNewClient("asdasd", "asfdasda", str[0], str[1]);
+            _Clients.Add(Bank.AddNewClient(inputData));
         }
 
         public override void Edit(Client editClient)

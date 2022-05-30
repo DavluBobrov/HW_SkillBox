@@ -50,19 +50,6 @@ namespace Block_11_1
             return null;
         }
 
-        public void SerialazeDataClients()
-        {
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-            string jsonString = JsonSerializer.Serialize(_Clients, options: options);
-            using (StreamWriter sw = new StreamWriter("DataClients.json", true))
-            {
-                sw.WriteLine(jsonString);
-            }
-        }
-
         public void Edit(int clientID)
         {
             Edit(GetClient(clientID));
