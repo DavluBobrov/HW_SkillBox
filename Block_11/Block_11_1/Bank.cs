@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using static Block_11_1.EnumTypes;
 
 namespace Block_11_1
 {
@@ -61,11 +62,25 @@ namespace Block_11_1
                     Series = inputDataClient[4],
                     Number = inputDataClient[5]
                 },
-                ID = _MaxID + 1
+                ID = _MaxID + 1,
+                EditsDataLog = InitLogs(TypeEmployee.Manager)
             };
             _Clients.Add(rCl);
             _MaxID++;
             return new ProxyManagerClient(rCl);
+        }
+
+        private static Dictionary<DataTypeClient, List<Log>> InitLogs(TypeEmployee typeEmployee)
+        {
+            Dictionary<DataTypeClient, List<Log>> EditsDataLog = new();
+            EditsDataLog.Add(DataTypeClient.LastName, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
+            EditsDataLog.Add(DataTypeClient.FirstName, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
+            EditsDataLog.Add(DataTypeClient.Patronymic, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
+            EditsDataLog.Add(DataTypeClient.PhoneNumber, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
+            EditsDataLog.Add(DataTypeClient.PassportData, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
+            EditsDataLog.Add(DataTypeClient.ID, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
+
+            return EditsDataLog;
         }
 
         private void FillClients()
@@ -79,7 +94,9 @@ namespace Block_11_1
                     $"fName{i}",
                     $"Patronymic{i}",
                     $"+79{r.Next(100000000, 1000000000)}",
-                    new Passport($"{r.Next(1000, 10000)}", $"{r.Next(100000, 1000000)}")));
+                    new Passport($"{r.Next(1000, 10000)}", $"{r.Next(100000, 1000000)}")
+                    ));
+                _Clients[i].EditsDataLog = InitLogs(TypeEmployee.Randomizer);
             }
         }
 

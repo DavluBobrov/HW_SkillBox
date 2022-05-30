@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Block_11_1;
+using static Block_11_1.EnumTypes;
 
 namespace Block_11_1
 {
@@ -71,21 +73,25 @@ namespace Block_11_1
         {
             var strPassData = v.Split(' ');
             SelectedClient.PassportData = new Passport(strPassData[0], strPassData[1]);
+            Logging(DataTypeClient.PassportData, TypeEmployee.Manager);
         }
 
         private void EditPatronymic(string v)
         {
             SelectedClient.Patronymic = v;
+            Logging(DataTypeClient.Patronymic, TypeEmployee.Manager);
         }
 
         private void EditLastName(string v)
         {
             SelectedClient.LastName = v;
+            Logging(DataTypeClient.LastName, TypeEmployee.Manager);
         }
 
         private void EditFirstName(string v)
         {
             SelectedClient.FirstName = v;
+            Logging(DataTypeClient.FirstName, TypeEmployee.Manager);
         }
     }
 }

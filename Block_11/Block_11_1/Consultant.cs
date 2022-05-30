@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using static Block_11_1.EnumTypes;
 
 namespace Block_11_1
 {
@@ -53,6 +54,7 @@ namespace Block_11_1
         public void Edit(int clientID)
         {
             Edit(GetClient(clientID));
+            Logging(DataTypeClient.PhoneNumber, TypeEmployee.Consultant);
         }
 
         public virtual void Edit(Client editClient)
@@ -61,7 +63,7 @@ namespace Block_11_1
             EditPhoneNumber(Console.ReadLine());
         }
 
-        protected void EditPhoneNumber(string newPhone)
+        protected virtual void EditPhoneNumber(string newPhone)
         {
             SelectedClient.PhoneNumber = newPhone;
         }
@@ -70,6 +72,15 @@ namespace Block_11_1
         {
             Console.WriteLine("Вы Можете менять только номер телефона:");
             Console.Write("Введите новый номер телефона без 8 или +7: ");
+        }
+
+        protected void Logging(DataTypeClient dataTypeClient, TypeEmployee typeEmployee)
+        {
+            if (SelectedClient.EditsDataLog.Keys.Contains(dataTypeClient))
+                SelectedClient.EditsDataLog[dataTypeClient].Add(new Log(typeEmployee, TypeEdit.Edit));
+            else
+                SelectedClient.EditsDataLog.Add(dataTypeClient, new List<Log>() {
+                    new Log(typeEmployee, TypeEdit.AddNew) });
         }
     }
 }
