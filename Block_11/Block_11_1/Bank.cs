@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using static Block_11_1.EnumTypes;
 
 namespace Block_11_1
@@ -93,7 +93,7 @@ namespace Block_11_1
                     $"lName{i}",
                     $"fName{i}",
                     $"Patronymic{i}",
-                    $"+79{r.Next(100000000, 1000000000)}",
+                    $"9{r.Next(100000000, 1000000000)}",
                     new Passport($"{r.Next(1000, 10000)}", $"{r.Next(100000, 1000000)}")
                     ));
                 _Clients[i].EditsDataLog = InitLogs(TypeEmployee.Randomizer);
@@ -103,18 +103,14 @@ namespace Block_11_1
         private void DeserializeDataClients()
         {
             if (File.Exists("DataClients.json"))
-                _Clients = JsonSerializer.Deserialize(File.ReadAllText("DataClients.json"), typeof(List<RealClient>)) as List<RealClient>;
+                _Clients = JsonConvert.DeserializeObject<List<RealClient>>(File.ReadAllText("DataClients.json"));
             else
                 FillClients();
         }
 
         public void SerialazeDataClients()
         {
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-            string jsonString = JsonSerializer.Serialize(_Clients, options: options);
+            string jsonString = JsonConvert.SerializeObject(_Clients, Formatting.Indented); ;
             using (StreamWriter sw = new StreamWriter("DataClients.json"))
             {
                 sw.WriteLine(jsonString);

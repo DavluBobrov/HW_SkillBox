@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Block_11_1;
 using static Block_11_1.EnumTypes;
 
 namespace Block_11_1

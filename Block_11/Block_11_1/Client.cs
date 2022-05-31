@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Block_11_1
 {
@@ -22,6 +18,6 @@ namespace Block_11_1
 
         public Dictionary<EnumTypes.DataTypeClient, Log> EditsDataLog { get; set; } = new();
 
-        protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"+7{newPhone}" : this.PhoneNumber;
+        protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"{newPhone}" : this.PhoneNumber;
     }
 }
