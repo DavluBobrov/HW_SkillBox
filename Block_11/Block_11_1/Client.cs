@@ -20,7 +20,7 @@ namespace Block_11_1
             return $"{ID,4} {LastName,10} {FirstName,10} {Patronymic,15} {PhoneNumber,13} {PassportData,13}";
         }
 
-        public Dictionary<EnumTypes.DataTypeClient, List<Log>> EditsDataLog { get; set; }
+        public Dictionary<EnumTypes.DataTypeClient, Log> EditsDataLog { get; set; } = new();
 
         protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"+7{newPhone}" : this.PhoneNumber;
     }

@@ -77,10 +77,9 @@ namespace Block_11_1
         protected void Logging(DataTypeClient dataTypeClient, TypeEmployee typeEmployee)
         {
             if (SelectedClient.EditsDataLog.Keys.Contains(dataTypeClient))
-                SelectedClient.EditsDataLog[dataTypeClient].Add(new Log(typeEmployee, TypeEdit.Edit));
+                SelectedClient.EditsDataLog[dataTypeClient] = new Log(typeEmployee, TypeEdit.Edit);
             else
-                SelectedClient.EditsDataLog.Add(dataTypeClient, new List<Log>() {
-                    new Log(typeEmployee, TypeEdit.AddNew) });
+                SelectedClient.EditsDataLog.Add(dataTypeClient, new Log(typeEmployee, TypeEdit.AddNew));
         }
     }
 }

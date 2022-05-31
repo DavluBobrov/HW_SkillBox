@@ -70,15 +70,15 @@ namespace Block_11_1
             return new ProxyManagerClient(rCl);
         }
 
-        private static Dictionary<DataTypeClient, List<Log>> InitLogs(TypeEmployee typeEmployee)
+        private static Dictionary<DataTypeClient, Log> InitLogs(TypeEmployee typeEmployee)
         {
-            Dictionary<DataTypeClient, List<Log>> EditsDataLog = new();
-            EditsDataLog.Add(DataTypeClient.LastName, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.FirstName, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.Patronymic, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.PhoneNumber, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.PassportData, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.ID, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
+            Dictionary<DataTypeClient, Log> EditsDataLog = new();
+            EditsDataLog.Add(DataTypeClient.LastName, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.FirstName, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.Patronymic, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.PhoneNumber, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.PassportData, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.ID, new Log(typeEmployee, TypeEdit.AddNew));
 
             return EditsDataLog;
         }
