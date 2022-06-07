@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Block_11_1.EnumTypes;
 
 namespace Block_11_1
 {
@@ -20,7 +21,7 @@ namespace Block_11_1
             return $"{ID,4} {LastName,10} {FirstName,10} {Patronymic,15} {PhoneNumber,13} {PassportData,13}";
         }
 
-        public Dictionary<EnumTypes.DataTypeClient, List<Log>> EditsDataLog { get; set; }
+        public Dictionary<DataTypeClient, List<Log>> EditsDataLog { get; set; }
 
         protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"+7{newPhone}" : this.PhoneNumber;
     }
