@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using static Block_11_1.EnumTypes;
 
 namespace Block_11_1
@@ -70,15 +70,15 @@ namespace Block_11_1
             return new ProxyManagerClient(rCl);
         }
 
-        private static Dictionary<DataTypeClient, List<Log>> InitLogs(TypeEmployee typeEmployee)
+        private static Dictionary<DataTypeClient, Log> InitLogs(TypeEmployee typeEmployee)
         {
-            Dictionary<DataTypeClient, List<Log>> EditsDataLog = new();
-            EditsDataLog.Add(DataTypeClient.LastName, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.FirstName, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.Patronymic, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.PhoneNumber, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.PassportData, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
-            EditsDataLog.Add(DataTypeClient.ID, new List<Log>() { new Log(typeEmployee, TypeEdit.AddNew) });
+            Dictionary<DataTypeClient, Log> EditsDataLog = new();
+            EditsDataLog.Add(DataTypeClient.LastName, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.FirstName, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.Patronymic, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.PhoneNumber, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.PassportData, new Log(typeEmployee, TypeEdit.AddNew));
+            EditsDataLog.Add(DataTypeClient.ID, new Log(typeEmployee, TypeEdit.AddNew));
 
             return EditsDataLog;
         }
@@ -93,7 +93,7 @@ namespace Block_11_1
                     $"lName{i}",
                     $"fName{i}",
                     $"Patronymic{i}",
-                    $"+79{r.Next(100000000, 1000000000)}",
+                    $"9{r.Next(100000000, 1000000000)}",
                     new Passport($"{r.Next(1000, 10000)}", $"{r.Next(100000, 1000000)}")
                     ));
                 _Clients[i].EditsDataLog = InitLogs(TypeEmployee.Randomizer);
@@ -103,18 +103,14 @@ namespace Block_11_1
         private void DeserializeDataClients()
         {
             if (File.Exists("DataClients.json"))
-                _Clients = JsonSerializer.Deserialize(File.ReadAllText("DataClients.json"), typeof(List<RealClient>)) as List<RealClient>;
+                _Clients = JsonConvert.DeserializeObject<List<RealClient>>(File.ReadAllText("DataClients.json"));
             else
                 FillClients();
         }
 
         public void SerialazeDataClients()
         {
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true
-            };
-            string jsonString = JsonSerializer.Serialize(_Clients, options: options);
+            string jsonString = JsonConvert.SerializeObject(_Clients, Formatting.Indented); ;
             using (StreamWriter sw = new StreamWriter("DataClients.json"))
             {
                 sw.WriteLine(jsonString);
