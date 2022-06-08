@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Block_11_1.EnumTypes;
 
 namespace Block_11_1
@@ -20,7 +17,7 @@ namespace Block_11_1
             return $"{ID,4} {LastName,10} {FirstName,10} {Patronymic,15} {PhoneNumber,13} {PassportData,13}";
         }
 
-        public Dictionary<EnumTypes.DataTypeClient, Log> EditsDataLog { get; set; } = new();
+        public Dictionary<DataTypeClient, Log> EditsDataLog { get; set; } = new();
 
         protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"{newPhone}" : this.PhoneNumber;
     }
