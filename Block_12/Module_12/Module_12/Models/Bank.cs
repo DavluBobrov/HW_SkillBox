@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Module_12.Models.Clients;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using static Block_11_1.EnumTypes;
+using static Module_12.Models.EnumTypes;
 
-namespace Block_11_1
+namespace Module_12.Models
 {
     internal class Bank
     {

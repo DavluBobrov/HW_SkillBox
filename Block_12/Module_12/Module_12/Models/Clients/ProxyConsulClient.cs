@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Block_11_1
+namespace Module_12.Models.Clients
 {
     internal class ProxyConsulClient : Client
     {

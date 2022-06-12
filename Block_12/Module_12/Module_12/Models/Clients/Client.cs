@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using static Block_11_1.EnumTypes;
+using static Module_12.Models.EnumTypes;
 
-namespace Block_11_1
+namespace Module_12.Models.Clients
 {
     internal abstract class Client
     {
