@@ -1,4 +1,4 @@
-﻿namespace Block_11_1
+﻿namespace Module_12.Models.Clients
 {
     internal class RealClient : Client
     {

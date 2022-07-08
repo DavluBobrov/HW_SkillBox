@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Module_12.Models.Clients;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Block_11_1.EnumTypes;
+using static Module_12.Models.EnumTypes;
 
-namespace Block_11_1
+namespace Module_12.Models.Employees
 {
     internal class Consultant : IEditClient
     {
