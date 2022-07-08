@@ -3,8 +3,99 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:Module_12.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="Exit" Command="{Binding CloseApplicationCommand}" />
+                <Separator />
+                <MenuItem Header="Serialize" Command="{Binding SerialazeDataCommand}" />
+                <Separator />
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <TextBlock Text="Selected departament:" />
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Клиенты">
+                <DataGrid ItemsSource="{Binding SelectedEmployee.DataClientsEmployee}" SelectedItem="{Binding SelectedClient}" />
+            </GroupBox>
+            <GroupBox Header="Сотрудник" Grid.Column="1" Grid.Row="0">
+                <DockPanel>
+                    <TextBlock Text="{Binding SelectedEmployee.CanChangedPhoneNumber}" FontSize="36" DockPanel.Dock="Bottom" />
+                    <ComboBox ItemsSource="{Binding Employees}" DisplayMemberPath="Role"
+                          SelectedItem="{Binding SelectedEmployee}"
+                       Height="30" MinWidth="300" DockPanel.Dock="Top" />
+                    <ComboBox ItemsSource="{Binding Bank}" DisplayMemberPath="_Departaments"
+                          SelectedItem="{Binding SelectedEmployee}"
+                       Height="30" MinWidth="300" DockPanel.Dock="Top" />
+                    <!--<DataGrid ItemsSource="{Binding RealClients}"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
+                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
+                            <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}" />
+                            <DataGridTextColumn Header="Пасспорт" Binding="{Binding PassportData}" />
+                        </DataGrid.Columns>
+                    </DataGrid>-->
+                    <GroupBox Header="Выбранный клиент">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Имя" TextAlignment="Center" VerticalAlignment="Center"
+                                           Width="100" Margin="10"
+                                           Grid.Column="0" Grid.Row="0" />
+                            <TextBlock Text="Фамилия" TextAlignment="Center" VerticalAlignment="Center"
+                                           Width="100" Margin="10"
+                                           Grid.Column="0" Grid.Row="1" />
+                            <TextBlock Text="Отчество" TextAlignment="Center" VerticalAlignment="Center"
+                                           Width="100" Margin="10"
+                                           Grid.Column="0" Grid.Row="2" />
+                            <TextBlock Text="Номер телефона" TextAlignment="Center" VerticalAlignment="Center"
+                                           Width="100" Margin="10"
+                                           Grid.Column="0" Grid.Row="3" />
+                            <TextBlock Text="Пасспорт" TextAlignment="Center" VerticalAlignment="Center"
+                                           Width="100" Margin="10"
+                                           Grid.Column="0" Grid.Row="4" />
+                            <TextBox Text="{Binding SelectedClient.FirstName}"
+                                      Margin="10"
+                                     Grid.Column="1" Grid.Row="0" />
+                            <TextBox Text="{Binding SelectedClient.LastName}"
+                                      Margin="10"
+                                     Grid.Column="1" Grid.Row="1" />
+                            <TextBox Text="{Binding SelectedClient.Patronymic}"
+                                      Margin="10"
+                                     Grid.Column="1" Grid.Row="2" />
+                            <TextBox Text="{Binding SelectedClient.PhoneNumber}"
+                                      Margin="10"
+                                     Grid.Column="1" Grid.Row="3" />
+                            <TextBox Text="{Binding SelectedClient.PassportData}"
+                                      Margin="10"
+                                     Grid.Column="1" Grid.Row="4" />
+                        </Grid>
+                    </GroupBox>
+                </DockPanel>
+            </GroupBox>
+        </Grid>
+    </DockPanel>
 </Window>

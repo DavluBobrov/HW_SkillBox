@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using static Module_12.Models.EnumTypes;
@@ -10,7 +11,8 @@ namespace Module_12.Models.Employees
 {
     internal class Bank
     {
-        private static List<RealClient> _Clients = new();
+        public static ObservableCollection<Departament> _Departaments = new();
+        private Dictionary<string, Departament> _DepartamentMap = new();
         private static int _MaxID;
 
         public Bank()
@@ -21,26 +23,31 @@ namespace Module_12.Models.Employees
 
         private void MaxID()
         {
-            foreach (var item in _Clients)
+            foreach (var dep in _Departaments)
             {
-                if (_MaxID < item.ID) _MaxID = item.ID;
+                foreach (var cl in dep.Clients)
+                {
+                    if (_MaxID < cl.ID) _MaxID = cl.ID;
+                }
             }
         }
 
-        public List<Client> GetClientsForConsiltant()
+        public ObservableCollection<Client> GetClientsForConsiltant()
         {
-            List<Client> result = new();
-            result.AddRange(from item in _Clients
-                            select new ProxyConsulClient(item));
-            return result;
+            //ObservableCollection<Departament> result = new();
+            //result.AddRange(from item in _Departaments
+            //                select new Departament(item));
+            //return result;
+            return null;
         }
 
         public List<Client> GetClientsForManager()
         {
-            List<Client> result = new();
-            result.AddRange(from item in _Clients
-                            select new ProxyManagerClient(item));
-            return result;
+            //List<Client> result = new();
+            //result.AddRange(from item in _Departaments
+            //                select new ProxyManagerClient(item));
+            //return result;
+            return null;
         }
 
         /// <summary>
@@ -52,23 +59,24 @@ namespace Module_12.Models.Employees
         /// </param>
         public static Client AddNewClient(params string[] inputDataClient)
         {
-            RealClient rCl = new()
-            {
-                LastName = inputDataClient[0],
-                FirstName = inputDataClient[1],
-                Patronymic = inputDataClient[2],
-                PhoneNumber = inputDataClient[3],
-                PassportData = new Passport
-                {
-                    Series = inputDataClient[4],
-                    Number = inputDataClient[5]
-                },
-                ID = _MaxID + 1,
-                EditsDataLog = InitLogs(TypeEmployee.Manager)
-            };
-            _Clients.Add(rCl);
-            _MaxID++;
-            return new ProxyManagerClient(rCl);
+            //RealClient rCl = new()
+            //{
+            //    LastName = inputDataClient[0],
+            //    FirstName = inputDataClient[1],
+            //    Patronymic = inputDataClient[2],
+            //    PhoneNumber = inputDataClient[3],
+            //    PassportData = new Passport
+            //    {
+            //        Series = inputDataClient[4],
+            //        Number = inputDataClient[5]
+            //    },
+            //    ID = _MaxID + 1,
+            //    EditsDataLog = InitLogs(TypeEmployee.Manager)
+            //};
+            //_Departaments.Add(rCl);
+            //_MaxID++;
+            //return new ProxyManagerClient(rCl);
+            return null;
         }
 
         private static Dictionary<DataTypeClient, Log> InitLogs(TypeEmployee typeEmployee)
@@ -90,28 +98,35 @@ namespace Module_12.Models.Employees
             int count = r.Next(0, 100);
             for (int i = 0; i < count; i++)
             {
-                _Clients.Add(new RealClient(i,
+                string newName = $"dep_{r.Next(1, 10)}";
+                if (!_DepartamentMap.ContainsKey(newName))
+                    _DepartamentMap.Add(newName, new Departament(newName));
+                RealClient toAddClient = new(
+                    i,
                     $"lName{i}",
                     $"fName{i}",
                     $"Patronymic{i}",
                     $"9{r.Next(100000000, 1000000000)}",
-                    new Passport($"{r.Next(1000, 10000)}", $"{r.Next(100000, 1000000)}")
-                    ));
-                _Clients[i].EditsDataLog = InitLogs(TypeEmployee.Randomizer);
+                    new Passport($"{r.Next(1000, 10000)}", $"{r.Next(100000, 1000000)}"))
+                {
+                    EditsDataLog = InitLogs(TypeEmployee.Randomizer)
+                };
+
+                _DepartamentMap[newName].Clients.Add(toAddClient);
             }
         }
 
         private void DeserializeDataClients()
         {
             if (File.Exists("DataClients.json"))
-                _Clients = JsonConvert.DeserializeObject<List<RealClient>>(File.ReadAllText("DataClients.json"));
+                _Departaments = JsonConvert.DeserializeObject<ObservableCollection<Departament>>(File.ReadAllText("DataClients.json"));
             else
                 FillClients();
         }
 
         public void SerialazeDataClients()
         {
-            string jsonString = JsonConvert.SerializeObject(_Clients, Formatting.Indented); ;
+            string jsonString = JsonConvert.SerializeObject(_Departaments, Formatting.Indented); ;
             using (StreamWriter sw = new StreamWriter("DataClients.json"))
             {
                 sw.WriteLine(jsonString);
