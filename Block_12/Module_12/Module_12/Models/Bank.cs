@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using static Module_12.Models.EnumTypes;
@@ -10,7 +11,7 @@ namespace Module_12.Models
 {
     internal class Bank
     {
-        private static List<RealClient> _Clients = new();
+        private static ObservableCollection<Departament> _Departaments = new();
         private static int _MaxID;
 
         public Bank()
@@ -27,11 +28,19 @@ namespace Module_12.Models
             }
         }
 
-        public List<Client> GetClientsForConsiltant()
+        public List<Departament> GetClientsForConsiltant()
         {
-            List<Client> result = new();
-            result.AddRange(from item in _Clients
-                            select new ProxyConsulClient(item));
+            List<Departament> result = new();
+
+            foreach (var item in _Departaments)
+            {
+                ObservableCollection<Client> consulClients = new();
+                foreach (var cl in item.Clients)
+                {
+                    consulClients.Add(new ProxyConsulClient(cl as RealClient));
+                }
+                result.Add(new Departament(consulClients));
+            }
             return result;
         }
 

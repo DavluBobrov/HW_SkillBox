@@ -17,5 +17,6 @@ namespace Module_12.Models.Clients
         public override string PhoneNumber { get => $"+7{RClient.PhoneNumber}"; set => RClient.PhoneNumber = value; }
         public override Passport PassportData { get => RClient.PassportData; set => RClient.PassportData = value; }
         public override int ID { get => RClient.ID; set => Console.WriteLine("Нет Доступа"); }
+        public override Departament Departament { get => RClient.Departament; set => RClient.Departament = value; }
     }
 }

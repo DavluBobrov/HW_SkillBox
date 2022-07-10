@@ -29,5 +29,6 @@
         public override string PhoneNumber { get => _phoneNumber; set => _phoneNumber = EditTelephone(value); }
         public override Passport PassportData { get => _passportData; set => _passportData = value; }
         public override int ID { get => _iD; set => _iD = value; }
+        public override Departament Departament { get => Departament; set => Departament = value; }
     }
 }

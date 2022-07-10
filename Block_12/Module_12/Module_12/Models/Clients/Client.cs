@@ -10,6 +10,7 @@ namespace Module_12.Models.Clients
         public abstract string Patronymic { get; set; }
         public abstract string PhoneNumber { get; set; }
         public abstract Passport PassportData { get; set; }
+        public abstract Departament Departament { get; set; }
         public abstract int ID { get; set; }
 
         public override string ToString()
