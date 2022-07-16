@@ -10,19 +10,13 @@ namespace Module_12.Models
 {
     internal class Departament
     {
-        private ObservableCollection<Client> _Clients;
-
-        public Departament(ObservableCollection<Client> clients)
+        public Departament(string name)
         {
-            _Clients = clients;
+            Name = name;
+            Clients = new();
         }
 
-        public ObservableCollection<Client> Clients { get => _Clients; set => _Clients = value; }
-
-        public void AddCLient(Client newclient)
-        {
-            _Clients.Add(newclient);
-            newclient.Departament = this;
-        }
+        public string Name { get; set; }
+        public ObservableCollection<Client> Clients { get; set; }
     }
 }
