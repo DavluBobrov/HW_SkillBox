@@ -3,10 +3,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewmodels="clr-namespace:Module_12.ViewModels"
-        d:DataContext="{d:DesignInstance Type=viewmodels:MainWindowViewModel}"
+        xmlns:vm="clr-namespace:Module_12.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -18,40 +20,46 @@
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <TextBlock Text="Selected departament:" />
+            <TextBlock Text="{Binding SelectedDepartament.Name}" />
         </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition />
+                <ColumnDefinition Width="380" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <GroupBox Header="Клиенты">
-                <DataGrid ItemsSource="{Binding SelectedEmployee.DataClientsEmployee}" SelectedItem="{Binding SelectedClient}" />
+                <!--<DataGrid ItemsSource="{Binding SelectedDepartament.Clients}" SelectedItem="{Binding SelectedClient}" />-->
+                <DataGrid ItemsSource="{Binding SelectedDepartament.Clients}"
+                              AutoGenerateColumns="False" SelectedItem="{Binding SelectedClient}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
+                        <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
+                        <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}" />
+                        <DataGridTextColumn Header="Серия Паспорта" Binding="{Binding PassportData.Series}" />
+                        <DataGridTextColumn Header="Номер Паспорта" Binding="{Binding PassportData.Number}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </GroupBox>
             <GroupBox Header="Сотрудник" Grid.Column="1" Grid.Row="0">
                 <DockPanel>
-                    <TextBlock Text="{Binding SelectedEmployee.CanChangedPhoneNumber}" FontSize="36" DockPanel.Dock="Bottom" />
-                    <ComboBox ItemsSource="{Binding Employees}" DisplayMemberPath="Role"
+                    <TextBlock Text="" />
+                    <ComboBox ItemsSource="{Binding Employees}"
                           SelectedItem="{Binding SelectedEmployee}"
                        Height="30" MinWidth="300" DockPanel.Dock="Top" />
-                    <ComboBox ItemsSource="{Binding Bank}" DisplayMemberPath="_Departaments"
-                          SelectedItem="{Binding SelectedEmployee}"
+                    <ComboBox ItemsSource="{Binding SelectedEmployee.Departaments}"
+                          SelectedItem="{Binding SelectedDepartament}"
                        Height="30" MinWidth="300" DockPanel.Dock="Top" />
-                    <!--<DataGrid ItemsSource="{Binding RealClients}"
-                              AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" />
-                            <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" />
-                            <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}" />
-                            <DataGridTextColumn Header="Пасспорт" Binding="{Binding PassportData}" />
-                        </DataGrid.Columns>
-                    </DataGrid>-->
-                    <GroupBox Header="Выбранный клиент">
-                        <Grid>
+
+                    <GroupBox Header="Выбранный клиент" DockPanel.Dock="Top">
+                        <Grid Height="230">
                             <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
@@ -59,9 +67,11 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="4.5*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="6*" />
                             </Grid.ColumnDefinitions>
+                            <!--#region Названия-->
                             <TextBlock Text="Имя" TextAlignment="Center" VerticalAlignment="Center"
                                            Width="100" Margin="10"
                                            Grid.Column="0" Grid.Row="0" />
@@ -77,23 +87,39 @@
                             <TextBlock Text="Пасспорт" TextAlignment="Center" VerticalAlignment="Center"
                                            Width="100" Margin="10"
                                            Grid.Column="0" Grid.Row="4" />
+                            <TextBlock Text="Департамент" TextAlignment="Center" VerticalAlignment="Center"
+                                           Width="100" Margin="10"
+                                           Grid.Column="0" Grid.Row="5" />
+                            <!--#endregion-->
+                            <!--#region Поля для заполнения-->
                             <TextBox Text="{Binding SelectedClient.FirstName}"
-                                      Margin="10"
+                                      Margin="5" Grid.ColumnSpan="2"
                                      Grid.Column="1" Grid.Row="0" />
                             <TextBox Text="{Binding SelectedClient.LastName}"
-                                      Margin="10"
+                                      Margin="5" Grid.ColumnSpan="2"
                                      Grid.Column="1" Grid.Row="1" />
                             <TextBox Text="{Binding SelectedClient.Patronymic}"
-                                      Margin="10"
+                                      Margin="5" Grid.ColumnSpan="2"
                                      Grid.Column="1" Grid.Row="2" />
                             <TextBox Text="{Binding SelectedClient.PhoneNumber}"
-                                      Margin="10"
+                                     PreviewTextInput="OnPreviewTextInput" DataObject.Pasting="OnPasting"
+                                      Margin="5" Grid.ColumnSpan="2"
                                      Grid.Column="1" Grid.Row="3" />
-                            <TextBox Text="{Binding SelectedClient.PassportData}"
-                                      Margin="10"
+                            <TextBox Text="{Binding SelectedClient.PassportData.Series}"
+                                     PreviewTextInput="OnPreviewTextInput" DataObject.Pasting="OnPasting"
+                                      Margin="5"
                                      Grid.Column="1" Grid.Row="4" />
+                            <TextBox Text="{Binding SelectedClient.PassportData.Number}"
+                                     PreviewTextInput="OnPreviewTextInput" DataObject.Pasting="OnPasting"
+                                      Margin="5"
+                                     Grid.Column="2" Grid.Row="4" />
+                            <TextBox Text="{Binding SelectedClient.FirstName}"
+                                      Margin="5" Grid.ColumnSpan="2"
+                                     Grid.Column="1" Grid.Row="5" />
+                            <!--#endregion-->
                         </Grid>
                     </GroupBox>
+                    <Button Margin="5" Padding="1" Content="Добавить нового клиента" Command="{Binding OpenAddNewClientWindowCommand}" />
                 </DockPanel>
             </GroupBox>
         </Grid>

@@ -2,14 +2,14 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace Module_12
+namespace Module_12.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для AddNewClientWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddNewClientWindow : Window
     {
-        public MainWindow()
+        public AddNewClientWindow()
         {
             InitializeComponent();
         }
