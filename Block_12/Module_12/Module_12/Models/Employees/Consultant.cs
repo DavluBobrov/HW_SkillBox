@@ -1,6 +1,7 @@
 ﻿using Module_12.Models.Clients;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using static Module_12.Models.EnumTypes;
 
@@ -8,21 +9,23 @@ namespace Module_12.Models.Employees
 {
     internal class Consultant : IEditClient
     {
-        protected List<Client> _Clients;
+        private ObservableCollection<Departament> departaments;
         protected Client SelectedClient;
+
+        public ObservableCollection<Departament> Departaments { get => departaments; set => departaments = value; }
 
         public Consultant()
         {
         }
 
-        public Consultant(List<Client> inputCollection)
+        public Consultant(ObservableCollection<Departament> inputCollection)
         {
-            _Clients = inputCollection;
+            Departaments = inputCollection;
         }
 
         public void PrintAllClients()
         {
-            foreach (var item in _Clients)
+            foreach (var item in Departaments)
             {
                 Console.WriteLine(item.ToString());
             }
@@ -40,11 +43,11 @@ namespace Module_12.Models.Employees
 
         protected Client GetClient(int ID)
         {
-            foreach (var item in _Clients.Where(item => item.ID == ID))
-            {
-                SelectedClient = item;
-                return item;
-            }
+            //foreach (var item in _Departaments.Where(item => item.ID == ID))
+            //{
+            //    SelectedClient = item;
+            //    return item;
+            //}
             return null;
         }
 
@@ -77,6 +80,11 @@ namespace Module_12.Models.Employees
                 SelectedClient.EditsDataLog[dataTypeClient] = new Log(typeEmployee, TypeEdit.Edit);
             else
                 SelectedClient.EditsDataLog.Add(dataTypeClient, new Log(typeEmployee, TypeEdit.AddNew));
+        }
+
+        public override string ToString()
+        {
+            return "Consultant";
         }
     }
 }

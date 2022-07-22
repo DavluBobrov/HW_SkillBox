@@ -1,6 +1,7 @@
 ﻿using Module_12.Models.Clients;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using static Module_12.Models.EnumTypes;
 
@@ -8,13 +9,13 @@ namespace Module_12.Models.Employees
 {
     internal class Manager : Consultant
     {
-        public Manager(List<Client> inputCollection) : base(inputCollection)
+        public Manager(ObservableCollection<Departament> inputCollection) : base(inputCollection)
         {
         }
 
         public void AddNewClient(string[] inputData)
         {
-            _Clients.Add(Bank.AddNewClient(inputData));
+            //_Departaments.Add(Bank.AddNewClient(inputData));
         }
 
         public override void Edit(Client editClient)
@@ -90,6 +91,11 @@ namespace Module_12.Models.Employees
         {
             SelectedClient.FirstName = v;
             Logging(DataTypeClient.FirstName, TypeEmployee.Manager);
+        }
+
+        public override string ToString()
+        {
+            return "Manager";
         }
     }
 }

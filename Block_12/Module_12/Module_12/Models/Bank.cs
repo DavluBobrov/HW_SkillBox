@@ -7,13 +7,15 @@ using System.IO;
 using System.Linq;
 using static Module_12.Models.EnumTypes;
 
-namespace Module_12.Models.Employees
+namespace Module_12.Models
 {
     internal class Bank
     {
-        public static ObservableCollection<Departament> _Departaments = new();
-        private Dictionary<string, Departament> _DepartamentMap = new();
+        private static Dictionary<string, Departament> _DepartamentMap = new();
+
         private static int _MaxID;
+
+        public Dictionary<string, Departament> DepartamentMap { get => _DepartamentMap; set => _DepartamentMap = value; }
 
         public Bank()
         {
@@ -23,7 +25,7 @@ namespace Module_12.Models.Employees
 
         private void MaxID()
         {
-            foreach (var dep in _Departaments)
+            foreach (var dep in DepartamentMap.Values)
             {
                 foreach (var cl in dep.Clients)
                 {
@@ -32,22 +34,40 @@ namespace Module_12.Models.Employees
             }
         }
 
-        public ObservableCollection<Client> GetClientsForConsiltant()
+        public ObservableCollection<Departament> GetClientsForConsiltant()
         {
-            //ObservableCollection<Departament> result = new();
-            //result.AddRange(from item in _Departaments
-            //                select new Departament(item));
-            //return result;
-            return null;
+            ObservableCollection<Departament> result = new();
+
+            foreach (var item in DepartamentMap.Values)
+            {
+                Departament ToAddDep = new(item.Name);
+                ObservableCollection<Client> clCollToAdd = new();
+                foreach (var cl in item.Clients)
+                {
+                    clCollToAdd.Add(new ProxyConsulClient((RealClient)cl));
+                }
+                ToAddDep.Clients = clCollToAdd;
+                result.Add(ToAddDep);
+            }
+            return result;
         }
 
-        public List<Client> GetClientsForManager()
+        public ObservableCollection<Departament> GetClientsForManager()
         {
-            //List<Client> result = new();
-            //result.AddRange(from item in _Departaments
-            //                select new ProxyManagerClient(item));
-            //return result;
-            return null;
+            ObservableCollection<Departament> result = new();
+
+            foreach (var item in DepartamentMap.Values)
+            {
+                Departament ToAddDep = new(item.Name);
+                ObservableCollection<Client> clCollToAdd = new();
+                foreach (var cl in item.Clients)
+                {
+                    clCollToAdd.Add(new ProxyManagerClient((RealClient)cl));
+                }
+                ToAddDep.Clients = clCollToAdd;
+                result.Add(ToAddDep);
+            }
+            return result;
         }
 
         /// <summary>
@@ -95,12 +115,12 @@ namespace Module_12.Models.Employees
         private void FillClients()
         {
             Random r = new();
-            int count = r.Next(0, 100);
+            int count = r.Next(0, 250);
             for (int i = 0; i < count; i++)
             {
                 string newName = $"dep_{r.Next(1, 10)}";
-                if (!_DepartamentMap.ContainsKey(newName))
-                    _DepartamentMap.Add(newName, new Departament(newName));
+                if (!DepartamentMap.ContainsKey(newName))
+                    DepartamentMap.Add(newName, new Departament(newName));
                 RealClient toAddClient = new(
                     i,
                     $"lName{i}",
@@ -109,24 +129,24 @@ namespace Module_12.Models.Employees
                     $"9{r.Next(100000000, 1000000000)}",
                     new Passport($"{r.Next(1000, 10000)}", $"{r.Next(100000, 1000000)}"))
                 {
-                    EditsDataLog = InitLogs(TypeEmployee.Randomizer)
+                    EditsDataLog = InitLogs(TypeEmployee.Randomizer),
                 };
 
-                _DepartamentMap[newName].Clients.Add(toAddClient);
+                DepartamentMap[newName].Clients.Add(toAddClient);
             }
         }
 
         private void DeserializeDataClients()
         {
             if (File.Exists("DataClients.json"))
-                _Departaments = JsonConvert.DeserializeObject<ObservableCollection<Departament>>(File.ReadAllText("DataClients.json"));
+                DepartamentMap = JsonConvert.DeserializeObject<Dictionary<string, Departament>>(File.ReadAllText("DataClients.json"));
             else
                 FillClients();
         }
 
         public void SerialazeDataClients()
         {
-            string jsonString = JsonConvert.SerializeObject(_Departaments, Formatting.Indented); ;
+            string jsonString = JsonConvert.SerializeObject(DepartamentMap, Formatting.Indented); ;
             using (StreamWriter sw = new StreamWriter("DataClients.json"))
             {
                 sw.WriteLine(jsonString);

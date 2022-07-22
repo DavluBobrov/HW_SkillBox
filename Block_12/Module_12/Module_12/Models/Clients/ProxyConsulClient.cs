@@ -14,9 +14,9 @@ namespace Module_12.Models.Clients
         public override string LastName { get => RClient.LastName; set => Console.WriteLine("Нет Доступа"); }
         public override string FirstName { get => RClient.FirstName; set => Console.WriteLine("Нет Доступа"); }
         public override string Patronymic { get => RClient.Patronymic; set => Console.WriteLine("Нет Доступа"); }
-        public override string PhoneNumber { get => $"+7{RClient.PhoneNumber}"; set => RClient.PhoneNumber = value; }
+        public override string PhoneNumber { get => RClient.PhoneNumber; set => RClient.PhoneNumber = value; }
         public override Passport PassportData { get => new Passport(); set => Console.WriteLine("Нет Доступа"); }
         public override int ID { get => RClient.ID; set => Console.WriteLine("Нет Доступа"); }
-        public override Departament Departament { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        //public override Departament Departament { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

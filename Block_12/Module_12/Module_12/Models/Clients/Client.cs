@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Module_12.ViewModels.Base;
+using System.Collections.Generic;
 using static Module_12.Models.EnumTypes;
 
 namespace Module_12.Models.Clients
 {
-    internal abstract class Client
+    internal abstract class Client : ViewModel
     {
         public abstract string LastName { get; set; }
         public abstract string FirstName { get; set; }
@@ -11,7 +12,7 @@ namespace Module_12.Models.Clients
         public abstract string PhoneNumber { get; set; }
         public abstract Passport PassportData { get; set; }
 
-        public Departament Departament { get; set; }
+        //public Departament Departament { get; set; }
         public abstract int ID { get; set; }
 
         public override string ToString()
