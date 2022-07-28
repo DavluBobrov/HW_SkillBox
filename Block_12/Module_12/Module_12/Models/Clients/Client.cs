@@ -4,7 +4,7 @@ using static Module_12.Models.EnumTypes;
 
 namespace Module_12.Models.Clients
 {
-    internal abstract class Client : ViewModel
+    internal abstract class Client
     {
         public abstract string LastName { get; set; }
         public abstract string FirstName { get; set; }

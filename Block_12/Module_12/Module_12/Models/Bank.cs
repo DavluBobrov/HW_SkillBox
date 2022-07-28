@@ -15,26 +15,29 @@ namespace Module_12.Models
 
         private static int _MaxID;
 
-        public Dictionary<string, Departament> DepartamentMap { get => _DepartamentMap; set => _DepartamentMap = value; }
+        public static Dictionary<string, Departament> DepartamentMap { get => _DepartamentMap; set => _DepartamentMap = value; }
+        public static ObservableCollection<Departament> ClientsForConsiltant { get => GetClientsForConsiltant(); }
+        public static ObservableCollection<Departament> ClientsForManager { get => GetClientsForManager(); }
+        public static int MaxID { get => _MaxID; set => _MaxID = value; }
 
         public Bank()
         {
             DeserializeDataClients();
-            MaxID();
+            CalculateMaxID();
         }
 
-        private void MaxID()
+        private void CalculateMaxID()
         {
             foreach (var dep in DepartamentMap.Values)
             {
                 foreach (var cl in dep.Clients)
                 {
-                    if (_MaxID < cl.ID) _MaxID = cl.ID;
+                    if (MaxID < cl.ID) MaxID = cl.ID;
                 }
             }
         }
 
-        public ObservableCollection<Departament> GetClientsForConsiltant()
+        private static ObservableCollection<Departament> GetClientsForConsiltant()
         {
             ObservableCollection<Departament> result = new();
 
@@ -52,7 +55,7 @@ namespace Module_12.Models
             return result;
         }
 
-        public ObservableCollection<Departament> GetClientsForManager()
+        private static ObservableCollection<Departament> GetClientsForManager()
         {
             ObservableCollection<Departament> result = new();
 

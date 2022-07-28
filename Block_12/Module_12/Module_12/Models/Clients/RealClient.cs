@@ -27,7 +27,7 @@
         public override string FirstName { get => _firstName; set => _firstName = value; }
         public override string Patronymic { get => _patronymic; set => _patronymic = value; }
         public override string PhoneNumber { get => _phoneNumber; set => _phoneNumber = EditTelephone(value); }
-        public override Passport PassportData { get => _passportData; set => Set(ref _passportData, value); }
+        public override Passport PassportData { get => _passportData; set => _passportData = value; }
         public override int ID { get => _iD; set => _iD = value; }
         //public override Departament Departament { get => Departament; set => Departament = value; }
     }
