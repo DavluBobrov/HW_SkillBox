@@ -7,21 +7,14 @@ using static Module_12.Models.EnumTypes;
 
 namespace Module_12.Models.Employees
 {
-    internal class Consultant
+    internal class Consultant : IEmployee
     {
-        private ObservableCollection<Departament> departaments;
-
-        public ObservableCollection<Departament> Departaments { get => departaments; set => departaments = value; }
+        public bool IsManager { get; set; }
 
         public Consultant()
         {
-            departaments = Bank.ClientsForConsiltant;
+            IsManager = false;
         }
-
-        //public Consultant(ObservableCollection<Departament> inputCollection)
-        //{
-        //    Departaments = inputCollection;
-        //}
 
         public override string ToString()
         {

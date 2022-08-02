@@ -7,11 +7,13 @@ using static Module_12.Models.EnumTypes;
 
 namespace Module_12.Models.Employees
 {
-    internal class Manager : Consultant
+    internal class Manager : IEmployee
     {
+        public bool IsManager { get; set; }
+
         public Manager()
         {
-            Departaments = Bank.ClientsForManager;
+            IsManager = true;
         }
 
         public override string ToString()
