@@ -21,7 +21,5 @@ namespace Module_12.Models.Clients
         }
 
         public Dictionary<DataTypeClient, Log> EditsDataLog { get; set; } = new();
-
-        protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"{newPhone}" : this.PhoneNumber;
     }
 }

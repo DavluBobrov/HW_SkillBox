@@ -1,6 +1,6 @@
 ﻿namespace Module_12.Models.Clients
 {
-    internal class RealClient : Client
+    internal class RealClient
     {
         private int _iD;
         private string _lastName;
@@ -8,6 +8,14 @@
         private string _patronymic;
         private string _phoneNumber;
         private Passport _passportData;
+
+        public string LastName { get => _lastName; set => _lastName = value; }
+        public string FirstName { get => _firstName; set => _firstName = value; }
+        public string Patronymic { get => _patronymic; set => _patronymic = value; }
+
+        public string PhoneNumber { get => _phoneNumber; set => _phoneNumber = EditTelephone(value); }
+        public Passport PassportData { get => _passportData; set => _passportData = value; }
+        public int ID { get => _iD; set => _iD = value; }
 
         public RealClient()
         {
@@ -23,12 +31,6 @@
             _passportData = passportData;
         }
 
-        public override string LastName { get => _lastName; set => _lastName = value; }
-        public override string FirstName { get => _firstName; set => _firstName = value; }
-        public override string Patronymic { get => _patronymic; set => _patronymic = value; }
-        public override string PhoneNumber { get => _phoneNumber; set => _phoneNumber = EditTelephone(value); }
-        public override Passport PassportData { get => _passportData; set => _passportData = value; }
-        public override int ID { get => _iD; set => _iD = value; }
-        //public override Departament Departament { get => Departament; set => Departament = value; }
+        protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"{newPhone}" : this.PhoneNumber;
     }
 }
