@@ -17,7 +17,7 @@ namespace Module_12.Models
         }
 
         public string Name { get; set; }
-        public ObservableCollection<Client> Clients { get; set; }
+        public List<Client> Clients { get; set; }
 
         public override string ToString()
         {
