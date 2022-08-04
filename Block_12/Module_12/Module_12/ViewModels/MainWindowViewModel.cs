@@ -1,12 +1,10 @@
 ﻿using Module_12.Infrastucture.Commands;
 using Module_12.Models;
-using Module_12.Models.Clients;
 using Module_12.Models.Dtos;
 using Module_12.Models.Employees;
 using Module_12.Models.Services;
 using Module_12.ViewModels.Base;
 using Module_12.Views.Windows;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;

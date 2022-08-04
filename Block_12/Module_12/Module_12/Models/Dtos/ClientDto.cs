@@ -1,9 +1,6 @@
 ﻿using Module_12.Models.Clients;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static Module_12.Models.EnumTypes;
 
 namespace Module_12.Models.Dtos

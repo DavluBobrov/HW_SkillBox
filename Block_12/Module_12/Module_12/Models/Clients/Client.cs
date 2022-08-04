@@ -1,5 +1,4 @@
-﻿using Module_12.ViewModels.Base;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using static Module_12.Models.EnumTypes;
 
 namespace Module_12.Models.Clients

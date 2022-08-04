@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace Module_12.Models.Clients
+﻿namespace Module_12.Models.Clients
 {
     internal class Passport
     {
