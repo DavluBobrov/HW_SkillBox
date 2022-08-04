@@ -28,7 +28,7 @@ namespace Module_12.Models.Clients
                           Passport passportData,
                           string departament)
         {
-            ID = new();
+            ID = Guid.NewGuid();
             LastName = lastName;
             FirstName = firstName;
             Patronymic = patronymic;

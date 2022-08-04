@@ -6,9 +6,9 @@
         xmlns:vm="clr-namespace:Module_12.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="1000">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:MainWindowViewModel />
-    </Window.DataContext>
+    </Window.DataContext>-->
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="File">
@@ -45,13 +45,13 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
-            <GroupBox Header="Сотрудник" Grid.Column="1" Grid.Row="0">
+            <GroupBox Header="Департаменты" Grid.Column="1" Grid.Row="0">
                 <DockPanel>
                     <TextBlock Text="" />
-                    <ComboBox ItemsSource="{Binding Employees}"
+                    <!--<ComboBox ItemsSource="{Binding Employees}"
                           SelectedItem="{Binding SelectedEmployee}"
-                       Height="30" MinWidth="300" DockPanel.Dock="Top" />
-                    <ComboBox ItemsSource="{Binding SelectedEmployee.Departaments}"
+                       Height="30" MinWidth="300" DockPanel.Dock="Top" />-->
+                    <ComboBox ItemsSource="{Binding Departaments}"
                           SelectedItem="{Binding SelectedDepartament}"
                        Height="30" MinWidth="300" DockPanel.Dock="Top" />
 

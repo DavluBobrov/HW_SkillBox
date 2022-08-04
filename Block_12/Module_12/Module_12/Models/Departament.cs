@@ -1,10 +1,5 @@
-﻿using Module_12.Models.Clients;
-using System;
+﻿using Module_12.Models.Dtos;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Module_12.Models
 {
@@ -17,7 +12,7 @@ namespace Module_12.Models
         }
 
         public string Name { get; set; }
-        public List<Client> Clients { get; set; }
+        public List<ClientDto> Clients { get; set; }
 
         public override string ToString()
         {

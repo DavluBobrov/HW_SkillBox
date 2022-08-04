@@ -1,9 +1,13 @@
 ﻿using Module_12.Infrastucture.Commands;
 using Module_12.Models;
 using Module_12.Models.Clients;
+using Module_12.Models.Dtos;
 using Module_12.Models.Employees;
+using Module_12.Models.Services;
 using Module_12.ViewModels.Base;
 using Module_12.Views.Windows;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
@@ -13,6 +17,32 @@ namespace Module_12.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         private AddNewClientWindow addNewClientWindow;
+
+        #region Departaments
+
+        private ObservableCollection<Departament> _Departaments;
+
+        public ObservableCollection<Departament> Departaments
+        {
+            get { return _Departaments; }
+            set { Set(ref _Departaments, value); }
+        }
+
+        #endregion Departaments
+
+        #region CLients
+
+        private ObservableCollection<ClientDto> _ClientDtos;
+
+        public ObservableCollection<ClientDto> ClientDtos
+        {
+            get { return _ClientDtos; }
+            set { Set(ref _ClientDtos, value); }
+        }
+
+        #endregion CLients
+
+        private IClientService ClientService { get; set; }
 
         #region Properties
 
@@ -30,24 +60,6 @@ namespace Module_12.ViewModels
 
         #region SelectedProp
 
-        #region Selected Employee
-
-        private Consultant _SelectedEmployee;
-
-        public Consultant SelectedEmployee
-        {
-            get { return _SelectedEmployee; }
-            set
-            {
-                Set(ref _SelectedEmployee, value);
-                if (_SelectedEmployee is Manager)
-                {
-                }
-            }
-        }
-
-        #endregion Selected Employee
-
         #region Selected Departament
 
         private Departament selectedDepartament;
@@ -59,9 +71,9 @@ namespace Module_12.ViewModels
 
         #region Selected Client
 
-        private Client _SelectedClient;
+        private ClientDto _SelectedClient;
 
-        public Client SelectedClient
+        public ClientDto SelectedClient
         { get => _SelectedClient; set => Set(ref _SelectedClient, value); }
 
         #endregion Selected Client
@@ -158,13 +170,13 @@ namespace Module_12.ViewModels
 
         #region Bank
 
-        private Bank _bank;
+        //private Bank _bank;
 
-        public Bank Bank
-        {
-            get { return _bank; }
-            set { Set(ref _bank, value); }
-        }
+        //public Bank Bank
+        //{
+        //    get { return _bank; }
+        //    set { Set(ref _bank, value); }
+        //}
 
         #endregion Bank
 
@@ -198,7 +210,7 @@ namespace Module_12.ViewModels
 
         private void OnSerialazeDataCommandExecuted(object p)
         {
-            Bank.SerialazeDataClients();
+            //Bank.SerialazeDataClients();
         }
 
         private bool CanSerialazeDataCommandExecute(object p) => true;
@@ -211,11 +223,11 @@ namespace Module_12.ViewModels
 
         private void OnOpenAddNewClientWindowCommandExecuted(object p)
         {
-            if (SelectedEmployee is Manager)
-            {
-                addNewClientWindow = new();
-                addNewClientWindow.Show();
-            }
+            //if (SelectedEmployee is Manager)
+            //{
+            //    addNewClientWindow = new();
+            //    addNewClientWindow.Show();
+            //}
         }
 
         private bool CanOpenAddNewClientWindowCommandExecute(object p) => true;
@@ -272,15 +284,15 @@ namespace Module_12.ViewModels
                 MessageBox.Show(errorMassege);
             else
             {
-                if (!Bank.DepartamentMap.ContainsKey(AddDepartamentName))
-                    Bank.DepartamentMap.Add(AddDepartamentName, new Departament(AddDepartamentName));
-                Bank.DepartamentMap[AddDepartamentName].Clients
-                    .Add(new RealClient(++Bank.MaxID,
-                                        LNameAdd,
-                                        FNameAdd,
-                                        PatrAdd,
-                                        PhoneAdd,
-                                        new(SeriesAdd, NumberAdd)));
+                //if (!Bank.DepartamentMap.ContainsKey(AddDepartamentName))
+                //    Bank.DepartamentMap.Add(AddDepartamentName, new Departament(AddDepartamentName));
+                //Bank.DepartamentMap[AddDepartamentName].Clients
+                //    .Add(new RealClient(++Bank.MaxID,
+                //                        LNameAdd,
+                //                        FNameAdd,
+                //                        PatrAdd,
+                //                        PhoneAdd,
+                //                        new(SeriesAdd, NumberAdd)));
                 MessageBox.Show("Новый клиент Добавлен");
             }
         }
@@ -291,12 +303,16 @@ namespace Module_12.ViewModels
 
         #endregion Commands
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IClientService clientService)
         {
+            ClientService = clientService;
+            ClientDtos = new ObservableCollection<ClientDto>(ClientService.GetClients());
+            Departaments = new ObservableCollection<Departament>(FillDepartaments(ClientDtos));
+
             #region Fill Employees
 
-            _bank = new Bank();
-            Employees = new ObservableCollection<Consultant> { new Consultant(), new Manager() };
+            //_bank = new Bank();
+            //Employees = new ObservableCollection<Consultant> { new Consultant(), new Manager() };
 
             #endregion Fill Employees
 
@@ -309,6 +325,18 @@ namespace Module_12.ViewModels
             AddNewClientCommand = new LambdaCommand(OnAddNewClientCommandExecuted, CanAddNewClientCommandExecute);
 
             #endregion Commands
+        }
+
+        private IEnumerable<Departament> FillDepartaments(ObservableCollection<ClientDto> clientDtos)
+        {
+            Dictionary<string, Departament> keyValuePairs = new();
+            foreach (var item in clientDtos)
+            {
+                if (!keyValuePairs.ContainsKey(item.Departament))
+                    keyValuePairs.Add(item.Departament, new Departament(item.Departament));
+                keyValuePairs[item.Departament].Clients.Add(item);
+            }
+            return keyValuePairs.Values;
         }
     }
 }

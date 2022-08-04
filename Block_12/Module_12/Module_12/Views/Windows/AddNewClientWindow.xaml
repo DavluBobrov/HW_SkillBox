@@ -7,9 +7,9 @@
         xmlns:vm="clr-namespace:Module_12.ViewModels"
         mc:Ignorable="d"
         Title="AddNewClientWindow" Height="280" Width="450" ResizeMode="NoResize">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:MainWindowViewModel />
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Grid Height="230">
         <Grid.RowDefinitions>
             <RowDefinition />

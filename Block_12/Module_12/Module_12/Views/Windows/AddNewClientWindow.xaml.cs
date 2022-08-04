@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using Autofac;
+using Module_12.ViewModels;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -12,6 +14,7 @@ namespace Module_12.Views.Windows
         public AddNewClientWindow()
         {
             InitializeComponent();
+            this.DataContext = App.Container.Resolve<MainWindowViewModel>();
         }
 
         #region Приколы с правильным вводом
