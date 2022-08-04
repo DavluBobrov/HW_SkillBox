@@ -6,21 +6,15 @@ namespace Module_12.Models.Clients
 {
     internal class RealClient
     {
-        private Guid _iD;
-        private string _lastName;
-        private string _firstName;
-        private string _patronymic;
         private string _phoneNumber;
-        private Passport _passportData;
-        private string _departament;
 
-        public string LastName { get => _lastName; set => _lastName = value; }
-        public string FirstName { get => _firstName; set => _firstName = value; }
-        public string Patronymic { get => _patronymic; set => _patronymic = value; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string Patronymic { get; set; }
         public string PhoneNumber { get => _phoneNumber; set => _phoneNumber = EditTelephone(value); }
-        public Passport PassportData { get => _passportData; set => _passportData = value; }
-        public Guid ID { get => _iD; set => _iD = value; }
-        public string Departament { get => _departament; init => _departament = value; }
+        public Passport PassportData { get; set; }
+        public Guid ID { get; set; }
+        public string Departament { get; init; }
         public Dictionary<DataTypeClient, Log> EditsDataLog { get; set; } = new();
 
         public RealClient()
@@ -34,15 +28,15 @@ namespace Module_12.Models.Clients
                           Passport passportData,
                           string departament)
         {
-            _iD = new();
-            _lastName = lastName;
-            _firstName = firstName;
-            _patronymic = patronymic;
+            ID = new();
+            LastName = lastName;
+            FirstName = firstName;
+            Patronymic = patronymic;
             _phoneNumber = phoneNumber;
-            _passportData = passportData;
-            _departament = departament;
+            PassportData = passportData;
+            Departament = departament;
         }
 
-        protected string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"{newPhone}" : this.PhoneNumber;
+        private string EditTelephone(string newPhone) => newPhone.Length == 10 ? $"{newPhone}" : this.PhoneNumber;
     }
 }
