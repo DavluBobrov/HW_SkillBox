@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Module_13
 {
+    #region Currency
+
     public class Funtic
     {
         public Funtic(int money)
         {
             Money = money;
+        }
+
+        public Funtic()
+        {
+            Money = 0;
         }
 
         public int Money { get; set; }
@@ -20,6 +23,10 @@ namespace Module_13
             return Money.ToString();
         }
     }
+
+    #endregion Currency
+
+    #region Variants Interfaces
 
     public interface IContrvatiantAccount<in T>
     {
@@ -37,50 +44,66 @@ namespace Module_13
         bool isOpen { get; set; }
     }
 
-    public class Deposite : IAccount<Funtic>
+    #endregion Variants Interfaces
+
+    #region Accounts
+
+    public abstract class Account<T> : IAccount<T>
+        where T : Funtic, new()
     {
-        public Deposite()
+        protected Account()
         {
-            Bablo = default;
+            Bablo = new();
             isOpen = false;
         }
 
-        public Funtic Bablo { get; private set; }
+        protected Account(T bablo)
+        {
+            Bablo = bablo;
+            isOpen = false;
+        }
+
+        public T Bablo { get; protected set; }
+
         public bool isOpen { get; set; }
 
-        public Funtic GetBablo(int amount)
+        public T GetBablo(int amount)
         {
             if (amount > Bablo.Money)
                 throw new ArgumentException("Слишком много просишь, нету столько!");
 
             Bablo.Money -= amount;
-            return new Funtic(amount);
+            T t = new();
+            t.Money = amount;
+            return t;
         }
 
-        public void SetBablo(Funtic value, int amount) => value.Money += amount;
+        public void SetBablo(T value, int amount) => value.Money += amount;
     }
 
-    public class NotDeposit : IAccount<Funtic>
+    public class Deposite<T> : Account<T>
+        where T : Funtic, new()
     {
-        public NotDeposit()
+        public Deposite() : base()
         {
-            Bablo = default;
-            isOpen = false;
         }
 
-        public Funtic Bablo { get; private set; }
-
-        public bool isOpen { get; set; }
-
-        public Funtic GetBablo(int amount)
+        public Deposite(T amount) : base(amount)
         {
-            if (amount > Bablo.Money)
-                throw new ArgumentException("Слишком много просишь, нету столько!");
-
-            Bablo.Money -= amount;
-            return new Funtic(amount);
         }
-
-        public void SetBablo(Funtic value, int amount) => value.Money += amount;
     }
+
+    public class NotDeposit<T> : Account<T>
+        where T : Funtic, new()
+    {
+        public NotDeposit() : base()
+        {
+        }
+
+        public NotDeposit(T amount) : base(amount)
+        {
+        }
+    }
+
+    #endregion Accounts
 }
