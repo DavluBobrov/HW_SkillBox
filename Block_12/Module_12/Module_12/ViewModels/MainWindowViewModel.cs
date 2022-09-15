@@ -1,10 +1,14 @@
-﻿using Module_12.Infrastucture.Commands;
+﻿using Autofac;
+using Module_12.Infrastucture.Commands;
 using Module_12.Models;
+using Module_12.Models.Clients;
 using Module_12.Models.Dtos;
 using Module_12.Models.Employees;
+using Module_12.Models.Repositories;
 using Module_12.Models.Services;
 using Module_12.ViewModels.Base;
 using Module_12.Views.Windows;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -30,7 +34,9 @@ namespace Module_12.ViewModels
 
         #region CLients
 
+        private IClientService ClientService { get; set; }
         private ObservableCollection<ClientDto> _ClientDtos;
+        public IEmployee SelectedEmployee { get => ClientService.AuthenticationEmployee; }
 
         public ObservableCollection<ClientDto> ClientDtos
         {
@@ -39,8 +45,6 @@ namespace Module_12.ViewModels
         }
 
         #endregion CLients
-
-        private IClientService ClientService { get; set; }
 
         #region Properties
 
@@ -60,10 +64,16 @@ namespace Module_12.ViewModels
 
         #region Selected Departament
 
-        private Departament selectedDepartament;
+        private static Departament selectedDepartament;
 
         public Departament SelectedDepartament
-        { get => selectedDepartament; set => Set(ref selectedDepartament, value); }
+        {
+            get { return MainWindowViewModel.selectedDepartament; }
+            set
+            {
+                Set(ref MainWindowViewModel.selectedDepartament, value);
+            }
+        }
 
         #endregion Selected Departament
 
@@ -221,11 +231,11 @@ namespace Module_12.ViewModels
 
         private void OnOpenAddNewClientWindowCommandExecuted(object p)
         {
-            //if (SelectedEmployee is Manager)
-            //{
-            //    addNewClientWindow = new();
-            //    addNewClientWindow.Show();
-            //}
+            if (SelectedEmployee is Manager && SelectedDepartament != null)
+            {
+                addNewClientWindow = new();
+                addNewClientWindow.ShowDialog();
+            }
         }
 
         private bool CanOpenAddNewClientWindowCommandExecute(object p) => true;
@@ -236,7 +246,7 @@ namespace Module_12.ViewModels
 
         public ICommand AddNewClientCommand { get; }        // Здесь живет сама команда
 
-        private void OnAddNewClientCommandExecuted(object p)
+        private void OnAddNewClientCommandExecuted(object? p)
         {
             bool isCorrect = true;
             string errorMassege = string.Empty;
@@ -260,6 +270,14 @@ namespace Module_12.ViewModels
                 errorMassege += "Поле Номера Телефона не заполнено!\n";
                 isCorrect = false;
             }
+            else
+            {
+                if (PhoneAdd.Length != 10)
+                {
+                    errorMassege += "Поле Телефона должно сожержать 10 цифр!\n";
+                    isCorrect = false;
+                }
+            }
             if (string.IsNullOrEmpty(NumberAdd))
             {
                 errorMassege += "Поле Номера паспорта не заполнено!\n";
@@ -267,30 +285,53 @@ namespace Module_12.ViewModels
             }
             else
             {
+                if (NumberAdd.Length != 6)
+                {
+                    errorMassege += "Поле Номера должно сожержать 6 цифр!\n";
+                    isCorrect = false;
+                }
             }
             if (string.IsNullOrEmpty(SeriesAdd))
             {
                 errorMassege += "Поле Серии паспорта не заполнено!\n";
                 isCorrect = false;
             }
-            if (string.IsNullOrEmpty(DepAdd))
+            else
             {
-                errorMassege += "Поле Департамента не заполнено!\n";
-                isCorrect = false;
+                if (SeriesAdd.Length != 4)
+                {
+                    errorMassege += "Поле Серии должно сожержать 4 цифр!\n";
+                    isCorrect = false;
+                }
             }
+            //if (string.IsNullOrEmpty(DepAdd))
+            //{
+            //    errorMassege += "Поле Департамента не заполнено!\n";
+            //    isCorrect = false;
+            //}
+
             if (!isCorrect)
                 MessageBox.Show(errorMassege);
             else
             {
-                //if (!Bank.DepartamentMap.ContainsKey(AddDepartamentName))
-                //    Bank.DepartamentMap.Add(AddDepartamentName, new Departament(AddDepartamentName));
-                //Bank.DepartamentMap[AddDepartamentName].Clients
-                //    .Add(new RealClient(++Bank.MaxID,
-                //                        LNameAdd,
-                //                        FNameAdd,
-                //                        PatrAdd,
-                //                        PhoneAdd,
-                //                        new(SeriesAdd, NumberAdd)));
+                RealClient addRC = new(LNameAdd,
+                                       FNameAdd,
+                                       PatrAdd,
+                                       PhoneAdd,
+                                       new(SeriesAdd, NumberAdd),
+                                       SelectedDepartament.Name);
+                SelectedDepartament.Clients.Add(new ClientDto()
+                {
+                    ID = addRC.ID,
+                    LastName = addRC.LastName,
+                    FirstName = addRC.FirstName,
+                    Patronymic = addRC.Patronymic,
+                    PhoneNumber = addRC.PhoneNumber,
+                    PassportData = addRC.PassportData,
+                    Departament = addRC.Departament
+                });
+                var Repo = App.Container.Resolve<ClientsRepo>();
+                Repo.AddNewClient(addRC);
                 MessageBox.Show("Новый клиент Добавлен");
             }
         }

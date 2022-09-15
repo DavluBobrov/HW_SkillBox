@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Module_12.Models
 {
-    internal class Departament
+    public class Departament
     {
         public Departament(string name)
         {

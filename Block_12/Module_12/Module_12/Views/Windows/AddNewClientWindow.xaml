@@ -53,19 +53,19 @@
         <TextBox Text="{Binding PatrAdd}"
                                       Margin="5" Grid.ColumnSpan="2"
                                      Grid.Column="1" Grid.Row="2" />
-        <TextBox Text="{Binding PhoneAdd}"
+        <TextBox Text="{Binding PhoneAdd}" MaxLength="10"
                                      PreviewTextInput="OnPreviewTextInput" DataObject.Pasting="OnPasting"
                                       Margin="5" Grid.ColumnSpan="2"
                                      Grid.Column="1" Grid.Row="3" />
-        <TextBox Text="{Binding SeriesAdd}"
+        <TextBox Text="{Binding SeriesAdd}" MaxLength="4"
                                      PreviewTextInput="OnPreviewTextInput" DataObject.Pasting="OnPasting"
                                       Margin="5"
                                      Grid.Column="1" Grid.Row="4" />
-        <TextBox Text="{Binding NumberAdd}"
+        <TextBox Text="{Binding NumberAdd}" MaxLength="6"
                                      PreviewTextInput="OnPreviewTextInput" DataObject.Pasting="OnPasting"
                                       Margin="5"
                                      Grid.Column="2" Grid.Row="4" />
-        <TextBox Text="{Binding DepAdd}"
+        <TextBox Text="{Binding SelectedDepartament}" IsReadOnly="True"
                                       Margin="5" Grid.ColumnSpan="2"
                                      Grid.Column="1" Grid.Row="5" />
         <!--#endregion-->

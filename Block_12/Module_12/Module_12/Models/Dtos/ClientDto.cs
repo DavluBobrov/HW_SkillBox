@@ -5,7 +5,7 @@ using static Module_12.Models.EnumTypes;
 
 namespace Module_12.Models.Dtos
 {
-    internal class ClientDto
+    public class ClientDto
     {
         private string _phoneNumber;
 

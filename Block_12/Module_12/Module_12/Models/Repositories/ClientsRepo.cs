@@ -61,5 +61,10 @@ namespace Module_12.Models.Repositories
 
             return EditsDataLog;
         }
+
+        internal void AddNewClient(RealClient addRC)
+        {
+            _clients.Add(addRC);
+        }
     }
 }

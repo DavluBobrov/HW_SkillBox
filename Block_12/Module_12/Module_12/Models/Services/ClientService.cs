@@ -12,6 +12,7 @@ namespace Module_12.Models.Services
         private readonly IAuthenticationService _authenticationService;
         private readonly IEmployeesRepo _userRepository;
         private readonly IClientsRepo _clientRepository;
+        public IEmployee AuthenticationEmployee { get => _authenticationService.AuthenticationEmployee; }
 
         public ClientService(
             IAuthenticationService authenticationService,

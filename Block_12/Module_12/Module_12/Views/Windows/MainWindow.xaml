@@ -32,6 +32,7 @@
             <GroupBox Header="Клиенты">
                 <!--<DataGrid ItemsSource="{Binding SelectedDepartament.Clients}" SelectedItem="{Binding SelectedClient}" />-->
                 <DataGrid ItemsSource="{Binding SelectedDepartament.Clients}"
+                          CanUserAddRows="False" CanUserDeleteRows="False"
                               AutoGenerateColumns="False" SelectedItem="{Binding SelectedClient}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding ID}" />
@@ -110,7 +111,9 @@
                             <!--#endregion-->
                         </Grid>
                     </GroupBox>
-                    <Button Margin="5" Padding="1" Content="Добавить нового клиента" Command="{Binding OpenAddNewClientWindowCommand}" />
+                    <Button Margin="5" Padding="1" Content="Добавить нового клиента"
+                            Command="{Binding OpenAddNewClientWindowCommand}"
+                            CommandParameter="{Binding SelectedDepartament}" />
                 </DockPanel>
             </GroupBox>
         </Grid>

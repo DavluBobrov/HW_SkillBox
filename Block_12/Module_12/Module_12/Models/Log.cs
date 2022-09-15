@@ -2,7 +2,7 @@
 
 namespace Module_12.Models
 {
-    internal class Log
+    public class Log
     {
         public EnumTypes.TypeEmployee TypeEmployee;
         public EnumTypes.TypeEdit TypeEdit;

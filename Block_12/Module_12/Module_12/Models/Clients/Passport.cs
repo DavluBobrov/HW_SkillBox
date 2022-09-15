@@ -1,6 +1,6 @@
 ﻿namespace Module_12.Models.Clients
 {
-    internal class Passport
+    public class Passport
     {
         private string _series;
         private string _number;
