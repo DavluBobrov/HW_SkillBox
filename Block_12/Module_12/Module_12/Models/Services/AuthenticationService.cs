@@ -5,6 +5,10 @@ namespace Module_12.Models.Services
 {
     internal class AuthenticationService : IAuthenticationService
     {
+        public AuthenticationService()
+        {
+        }
+
         public IEmployee AuthenticationEmployee { get; set; }
 
         public void Authenticate(IEmployee employee) => AuthenticationEmployee = employee;
