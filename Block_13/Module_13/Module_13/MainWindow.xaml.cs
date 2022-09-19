@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Module_13
 {
@@ -31,72 +20,203 @@ namespace Module_13
 
         private void Grid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            CheckedAccounts();
+            RefreshButtons();
+        }
+
+        #region Стартовые кнопки
+
+        private void OpenAccCombo_Click(object sender, RoutedEventArgs e)
+        {
+            HideButtons();
+            TypeAccOpenComboBox.Visibility = Visibility.Visible;
+        }
+
+        private void CloseAccComboButton_Click(object sender, RoutedEventArgs e)
+        {
+            HideButtons();
+            TypeAccRemoveComboBox.Visibility = Visibility.Visible;
+        }
+
+        private void TopUpAccComboButton_Click(object sender, RoutedEventArgs e)
+        {
+            HideButtons();
+            TypeAccTopUpComboBox.Visibility = Visibility.Visible;
+        }
+
+        private void HideButtons()
+        {
+            OpenAccComboButton.Visibility = Visibility.Collapsed;
+            CloseAccComboButton.Visibility = Visibility.Collapsed;
+            TopUpAccComboButton.Visibility = Visibility.Collapsed;
+        }
+
+        #endregion Стартовые кнопки
+
+        #region События выбора в комбобоксах
+
+        private void TypeAccOpenComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OPEN_ACC_Button.Visibility = Visibility.Visible;
+        }
+
+        private void TypeAccRemoveComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CLOSE_ACC_Button.Visibility = Visibility.Visible;
+        }
+
+        private void TypeAccTopUpComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TopUpAccTextBox.Visibility = Visibility.Visible;
+            TOPUP_ACC_Button.Visibility = Visibility.Visible;
+        }
+
+        #endregion События выбора в комбобоксах
+
+        #region Кнопки после выбора счетов
+
+        private void OPEN_ACC_Click(object sender, RoutedEventArgs e)
+        {
+            switch (TypeAccOpenComboBox.SelectedItem.ToString())
+            {
+                case "Депозитный":
+                    (Grid.SelectedItem as Client).Deposit.isOpen = true;
+                    break;
+
+                case "Недепозитный":
+                    (Grid.SelectedItem as Client).NotDeposit.isOpen = true;
+                    break;
+            }
+            TypeAccOpenComboBox.SelectedIndex = -1;
+            TypeAccOpenComboBox.Visibility = Visibility.Collapsed;
+            CheckedAccounts();
+            RefreshButtons();
+        }
+
+        private void CLOSE_ACC_Button_Click(object sender, RoutedEventArgs e)
+        {
+            switch (TypeAccRemoveComboBox.SelectedItem.ToString())
+            {
+                case "Депозитный":
+                    (Grid.SelectedItem as Client).Deposit.isOpen = false;
+                    break;
+
+                case "Недепозитный":
+                    (Grid.SelectedItem as Client).NotDeposit.isOpen = false;
+                    break;
+            }
+            TypeAccRemoveComboBox.SelectedIndex = -1;
+            TypeAccRemoveComboBox.Visibility = Visibility.Collapsed;
+            CheckedAccounts();
+            RefreshButtons();
+        }
+
+        private void TOPUP_ACC_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Funtic funtic = new(Convert.ToInt32(TopUpAccTextBox.Text));
+            switch (TypeAccTopUpComboBox.SelectedItem.ToString())
+            {
+                case "Депозитный":
+                    (Grid.SelectedItem as Client).Deposit.SetBablo(funtic);
+                    break;
+
+                case "Недепозитный":
+                    (Grid.SelectedItem as Client).NotDeposit.SetBablo(funtic);
+                    break;
+            }
+            TypeAccTopUpComboBox.SelectedIndex = -1;
+            TypeAccTopUpComboBox.Visibility = Visibility.Collapsed;
+            TopUpAccTextBox.Text = "";
+            TopUpAccTextBox.Visibility = Visibility.Collapsed;
+            CheckedAccounts();
+            RefreshButtons();
+        }
+
+        #endregion Кнопки после выбора счетов
+
+        #region Обновление формы
+
+        private void UpdateAccounts()
+        {
             FirstNameTextBox.Text = (Grid.SelectedItem as Client).FirstName;
             LastNameTextBox.Text = (Grid.SelectedItem as Client).LastName;
-            CheckedAccounts();
             DepAccTextBox.Text = (Grid.SelectedItem as Client).Deposit.Bablo.Money.ToString();
             NotDepAccTextBox.Text = (Grid.SelectedItem as Client).NotDeposit.Bablo.Money.ToString();
-            RefreshButtons();
         }
 
         private void CheckedAccounts()
         {
+            TypeAccOpenComboBox.Items.Clear();
+            TypeAccRemoveComboBox.Items.Clear();
+            TypeAccTopUpComboBox.Items.Clear();
             if ((Grid.SelectedItem as Client).Deposit.isOpen)
             {
                 DepAccTextBox.Visibility = Visibility.Visible;
                 DepAccTextBlock.Visibility = Visibility.Visible;
+                TypeAccRemoveComboBox.Items.Add("Депозитный");
+                TypeAccTopUpComboBox.Items.Add("Депозитный");
             }
             else
             {
                 DepAccTextBox.Visibility = Visibility.Collapsed;
                 DepAccTextBlock.Visibility = Visibility.Collapsed;
+                TypeAccOpenComboBox.Items.Add("Депозитный");
             }
             if ((Grid.SelectedItem as Client).NotDeposit.isOpen)
             {
                 NotDepAccTextBox.Visibility = Visibility.Visible;
                 NotDepAccTextBlock.Visibility = Visibility.Visible;
+                TypeAccRemoveComboBox.Items.Add("Недепозитный");
+                TypeAccTopUpComboBox.Items.Add("Недепозитный");
             }
             else
             {
                 NotDepAccTextBox.Visibility = Visibility.Collapsed;
                 NotDepAccTextBlock.Visibility = Visibility.Collapsed;
+                TypeAccOpenComboBox.Items.Add("Недепозитный");
             }
-        }
-
-        private void OpenAccCombo_Click(object sender, RoutedEventArgs e)
-        {
-            OpenAccComboButton.Visibility = Visibility.Collapsed;
-            TypeAccComboBox.Visibility = Visibility.Visible;
-        }
-
-        private void TypeAccComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            OPEN_ACC_Button.Visibility = Visibility.Visible;
-        }
-
-        private void OPEN_ACC_Click(object sender, RoutedEventArgs e)
-        {
-            switch (TypeAccComboBox.SelectedIndex)
-            {
-                case 0:
-                    (Grid.SelectedItem as Client).Deposit.isOpen = true;
-                    break;
-
-                case 1:
-                    (Grid.SelectedItem as Client).NotDeposit.isOpen = true;
-                    break;
-            }
-            TypeAccComboBox.SelectedIndex = -1;
-            CheckedAccounts();
-            RefreshButtons();
+            TypeAccOpenComboBox.Visibility = (TypeAccOpenComboBox.Items.Count == 0) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void RefreshButtons()
         {
-            OpenAccComboButton.Visibility = Visibility.Visible;
-            TypeAccComboBox.Visibility = Visibility.Collapsed;
+            OpenAccComboButton.Visibility = (TypeAccOpenComboBox.Items.Count != 0) ? Visibility.Visible : Visibility.Collapsed;
+            CloseAccComboButton.Visibility = (TypeAccRemoveComboBox.Items.Count != 0) ? Visibility.Visible : Visibility.Collapsed;
+            TopUpAccComboButton.Visibility = (TypeAccRemoveComboBox.Items.Count != 0) ? Visibility.Visible : Visibility.Collapsed;
+            TransferGroupBox.Visibility = (TypeAccRemoveComboBox.Items.Count != 0) ? Visibility.Visible : Visibility.Collapsed;
+            TypeAccOpenComboBox.Visibility = Visibility.Collapsed;
             OPEN_ACC_Button.Visibility = Visibility.Collapsed;
-            OPEN_ACC_Button.UpdateLayout();
+            CLOSE_ACC_Button.Visibility = Visibility.Collapsed;
+            TOPUP_ACC_Button.Visibility = Visibility.Collapsed;
+            UpdateAccounts();
+            StartStateTransferGroup();
         }
+
+        #endregion Обновление формы
+
+        #region Transfer
+
+        private void StartStateTransferGroup()
+        {
+            foreach (var item in TransferGrid.Children)
+            {
+                switch (item)
+                {
+                    case TextBlock Tblock:
+                        Tblock.Visibility = Visibility.Collapsed; break;
+                    case TextBox Tbox:
+                        Tbox.Visibility = Visibility.Collapsed; break;
+                    case Button b:
+                        b.Visibility = Visibility.Collapsed; break;
+                    case ComboBox c:
+                        c.Visibility = Visibility.Collapsed; break;
+                    default:
+                        break;
+                }
+            }
+            StartTransferButton.Visibility = Visibility.Visible;
+        }
+
+        #endregion Transfer
     }
 }

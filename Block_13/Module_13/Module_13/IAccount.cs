@@ -30,7 +30,7 @@ namespace Module_13
 
     public interface IContrvatiantAccount<in T>
     {
-        void SetBablo(T value, int amount);
+        void SetBablo(T value);
     }
 
     public interface ICovariantAccount<out T>
@@ -78,7 +78,7 @@ namespace Module_13
             return t;
         }
 
-        public void SetBablo(T value, int amount) => value.Money += amount;
+        public void SetBablo(T value) => Bablo.Money += value.Money;
     }
 
     public class Deposite<T> : Account<T>

@@ -50,9 +50,9 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4.6*" />
-                            <ColumnDefinition Width="4*" />
-                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Имя" TextAlignment="Center" VerticalAlignment="Center"
                                            Width="100" Margin="10"
@@ -80,14 +80,50 @@
                                       Margin="5" Grid.ColumnSpan="2" Padding="5"  Visibility="Collapsed"
                                      Grid.Column="1" Grid.Row="3" IsReadOnly="True" />
                         <Button x:Name="OpenAccComboButton" Grid.Column="0" Grid.Row="5" Visibility="Collapsed" Content="Открыть счет" Click="OpenAccCombo_Click" />
-                        <ComboBox x:Name="TypeAccComboBox" Grid.Column="0" Grid.Row="5" Visibility="Collapsed" Text="Выберите тип счета" SelectionChanged="TypeAccComboBox_SelectionChanged">
-                            <TextBlock Text="Deposit" />
-                            <TextBlock Text="NotDeposit" />
-                        </ComboBox>
+                        <Button x:Name="CloseAccComboButton" Grid.Column="1" Grid.Row="5" Visibility="Collapsed" Content="Закрыть счет" Click="CloseAccComboButton_Click" />
+                        <Button x:Name="TopUpAccComboButton" Grid.Column="2" Grid.Row="5" Visibility="Collapsed" Content="Пополнить счет" Click="TopUpAccComboButton_Click" />
+                        <ComboBox x:Name="TypeAccOpenComboBox" Grid.Column="0" Grid.Row="5" Visibility="Collapsed" Text="Выберите тип счета" SelectionChanged="TypeAccOpenComboBox_SelectionChanged" />
+                        <ComboBox x:Name="TypeAccRemoveComboBox" Grid.Column="0" Grid.Row="5" Visibility="Collapsed" Text="Выберите тип счета" SelectionChanged="TypeAccRemoveComboBox_SelectionChanged" />
+                        <ComboBox x:Name="TypeAccTopUpComboBox" Grid.Column="0" Grid.Row="5" Visibility="Collapsed" Text="Выберите тип счета" SelectionChanged="TypeAccTopUpComboBox_SelectionChanged" />
+                        <TextBox x:Name="TopUpAccTextBox" Margin="5" Padding="5"  Visibility="Collapsed"
+                                     Grid.Column="1" Grid.Row="5" IsReadOnly="False" />
                         <Button x:Name="OPEN_ACC_Button" Grid.Column="2" Grid.Row="5" Content="Открыть счёт" Visibility="Collapsed" Click="OPEN_ACC_Click" />
+                        <Button x:Name="CLOSE_ACC_Button" Grid.Column="2" Grid.Row="5" Content="Закрыть счёт" Visibility="Collapsed" Click="CLOSE_ACC_Button_Click" />
+                        <Button x:Name="TOPUP_ACC_Button" Grid.Column="2" Grid.Row="5" Content="Пополнить счёт" Visibility="Collapsed" Click="TOPUP_ACC_Button_Click" />
                     </Grid>
                 </GroupBox>
-                <Button Margin="5" Padding="1" Content="Добавить нового клиента" Command="{Binding OpenAddNewClientWindowCommand}" />
+                <GroupBox x:Name="TransferGroupBox" DockPanel.Dock="Top" Header="Перевести клиенту банка" Visibility="Visible">
+                    <Grid x:Name="TransferGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1.5*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="StartTransferButton" Content="Перевести денег другому криенту" Grid.ColumnSpan="3" Visibility="Collapsed" />
+                        <TextBlock Text="Выберите счёт съёма" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
+                                           Grid.Column="0" Grid.Row="1" />
+                        <TextBlock Text="Выберите клиента кому будет осуществен перевод" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
+                                           Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="2" />
+                        <TextBlock Text="Выберите счёт перевода " TextAlignment="Left" VerticalAlignment="Center" Padding="3"
+                                           Grid.Column="0" Grid.Row="3" />
+                        <TextBlock Text="Сумма перевода" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
+                                           Grid.Column="0" Grid.Row="4" />
+                        <ComboBox x:Name="Id_ComboBox" Grid.Column="2" Grid.Row="2" Visibility="Visible" Text="Выберите тип счета" SelectionChanged="TypeAccTopUpComboBox_SelectionChanged" />
+                        <ComboBox x:Name="FromWhereAccComboBox" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Visible" />
+                        <ComboBox x:Name="ToWhereAccComboBox" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Visibility="Visible" />
+                        <TextBox x:Name="AmountToTransfer"  Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" Padding="3" IsReadOnly="False" />
+                        <Button x:Name="TransferButton" Grid.Column="2" Grid.Row="4" Content="Перервести" />
+                    </Grid>
+                </GroupBox>
+                <!--<Button Margin="5" Padding="1" Content="Добавить нового клиента" Command="{Binding OpenAddNewClientWindowCommand}" />-->
+                <TextBlock />
             </DockPanel>
         </Grid>
     </DockPanel>

@@ -26,6 +26,18 @@ namespace Module_13
     {
         public List<Client> Clients { get; set; }
 
+        public Client this[int ID]
+        {
+            get
+            {
+                foreach (var item in Clients)
+                {
+                    if (item.ID == ID) return item;
+                }
+                return null;
+            }
+        }
+
         public Bank()
         {
             Clients = new();
