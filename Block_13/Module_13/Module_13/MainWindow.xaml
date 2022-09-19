@@ -106,19 +106,22 @@
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="1.5*" />
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="StartTransferButton" Content="Перевести денег другому криенту" Grid.ColumnSpan="3" Visibility="Collapsed" />
-                        <TextBlock Text="Выберите счёт съёма" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
+                        <Button x:Name="StartTransferButton" Content="Перевести денег другому криенту" Grid.ColumnSpan="3" Visibility="Visible" Click="StartTransferButton_Click" />
+                        <TextBlock x:Name="FromWhereAccTextBlock" Text="Выберите счёт съёма" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
                                            Grid.Column="0" Grid.Row="1" />
-                        <TextBlock Text="Выберите клиента кому будет осуществен перевод" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
+                        <TextBlock x:Name="IdTextBlock" Text="Выберите клиента кому будет осуществен перевод" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
                                            Grid.Column="0" Grid.Row="2"  Grid.ColumnSpan="2" />
-                        <TextBlock Text="Выберите счёт перевода " TextAlignment="Left" VerticalAlignment="Center" Padding="3"
+                        <TextBlock x:Name="ToWhereAccTextBlock" Text="Выберите счёт перевода " TextAlignment="Left" VerticalAlignment="Center" Padding="3"
                                            Grid.Column="0" Grid.Row="3" />
-                        <TextBlock Text="Сумма перевода" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
+                        <TextBlock x:Name="TransferTextBlock" Text="Сумма перевода" TextAlignment="Left" VerticalAlignment="Center" Padding="3"
                                            Grid.Column="0" Grid.Row="4" />
-                        <ComboBox x:Name="Id_ComboBox" Grid.Column="2" Grid.Row="2" Visibility="Visible" Text="Выберите тип счета" SelectionChanged="TypeAccTopUpComboBox_SelectionChanged" />
-                        <ComboBox x:Name="FromWhereAccComboBox" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Visible" />
-                        <ComboBox x:Name="ToWhereAccComboBox" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Visibility="Visible" />
-                        <TextBox x:Name="AmountToTransfer"  Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" Padding="3" IsReadOnly="False" />
+                        <ComboBox x:Name="FromWhereAccComboBox" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Visibility="Visible"
+                                  SelectionChanged="FromWhereAccComboBox_SelectionChanged" />
+                        <ComboBox x:Name="Id_ComboBox" Grid.Column="2" Grid.Row="2" Visibility="Visible" Text="Выберите тип счета"
+                                  SelectionChanged="Id_ComboBox_SelectionChanged" />
+                        <ComboBox x:Name="ToWhereAccComboBox" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Visibility="Visible"
+                                  SelectionChanged="ToWhereAccComboBox_SelectionChanged" />
+                        <TextBox x:Name="AmountToTransfer" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="1" Padding="3" IsReadOnly="False" />
                         <Button x:Name="TransferButton" Grid.Column="2" Grid.Row="4" Content="Перервести" />
                     </Grid>
                 </GroupBox>

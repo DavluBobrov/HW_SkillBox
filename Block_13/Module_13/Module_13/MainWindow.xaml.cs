@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -12,6 +15,20 @@ namespace Module_13
         public Bank A = new Bank();
         public Client SelectedClient { get; set; }
 
+        public ObservableCollection<int> IdClientsWithOpenAccount
+        {
+            get
+            {
+                var result = new ObservableCollection<int>();
+                foreach (var item in A.Clients)
+                {
+                    if (item.NotDeposit.isOpen || item.Deposit.isOpen && item.ID != SelectedClient.ID)
+                        result.Add(item.ID);
+                }
+                return result;
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -20,6 +37,7 @@ namespace Module_13
 
         private void Grid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            SelectedClient = (sender as DataGrid).SelectedItem as Client;
             CheckedAccounts();
             RefreshButtons();
         }
@@ -149,12 +167,14 @@ namespace Module_13
             TypeAccOpenComboBox.Items.Clear();
             TypeAccRemoveComboBox.Items.Clear();
             TypeAccTopUpComboBox.Items.Clear();
+            FromWhereAccComboBox.Items.Clear();
             if ((Grid.SelectedItem as Client).Deposit.isOpen)
             {
                 DepAccTextBox.Visibility = Visibility.Visible;
                 DepAccTextBlock.Visibility = Visibility.Visible;
                 TypeAccRemoveComboBox.Items.Add("Депозитный");
                 TypeAccTopUpComboBox.Items.Add("Депозитный");
+                FromWhereAccComboBox.Items.Add("Депозитный");
             }
             else
             {
@@ -168,6 +188,7 @@ namespace Module_13
                 NotDepAccTextBlock.Visibility = Visibility.Visible;
                 TypeAccRemoveComboBox.Items.Add("Недепозитный");
                 TypeAccTopUpComboBox.Items.Add("Недепозитный");
+                FromWhereAccComboBox.Items.Add("Недепозитный");
             }
             else
             {
@@ -217,6 +238,50 @@ namespace Module_13
             StartTransferButton.Visibility = Visibility.Visible;
         }
 
+        private void StartTransferButton_Click(object sender, RoutedEventArgs e)
+        {
+            (sender as Button).Visibility = Visibility.Collapsed;
+            FromWhereAccComboBox.Visibility = Visibility.Visible;
+            FromWhereAccTextBlock.Visibility = Visibility.Visible;
+            Id_ComboBox.ItemsSource = IdClientsWithOpenAccount;
+        }
+
+        private void FromWhereAccComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            IdTextBlock.Visibility = Visibility.Visible;
+            Id_ComboBox.Visibility = Visibility.Visible;
+        }
+
+        private void Id_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ToWhereAccComboBox.Visibility = Visibility.Visible;
+            ToWhereAccTextBlock.Visibility = Visibility.Visible;
+        }
+
         #endregion Transfer
+
+        private void ToWhereAccComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private IEnumerable<string> GetListTypeAccOpen(int ID)
+        {
+            List<string> result = new List<string>();
+            if (A[ID].Deposit.isOpen)
+                result.Add("Депозитный");
+            if (A[ID].NotDeposit.isOpen)
+                result.Add("Недепозитный");
+            return result;
+        }
+
+        private IEnumerable<string> GetListTypeAccNotOpen(int ID)
+        {
+            List<string> result = new List<string>();
+            if (!A[ID].Deposit.isOpen)
+                result.Add("Депозитный");
+            if (!A[ID].NotDeposit.isOpen)
+                result.Add("Недепозитный");
+            return result;
+        }
     }
 }
