@@ -91,6 +91,11 @@ namespace Module_13
         public Deposite(T amount) : base(amount)
         {
         }
+
+        public override string ToString()
+        {
+            return "Депозитный";
+        }
     }
 
     public class NotDeposit<T> : Account<T>
@@ -102,6 +107,11 @@ namespace Module_13
 
         public NotDeposit(T amount) : base(amount)
         {
+        }
+
+        public override string ToString()
+        {
+            return "Недепозитный";
         }
     }
 

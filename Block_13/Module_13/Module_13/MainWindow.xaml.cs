@@ -95,16 +95,7 @@ namespace Module_13
 
         private void OPEN_ACC_Click(object sender, RoutedEventArgs e)
         {
-            switch (TypeAccOpenComboBox.SelectedItem.ToString())
-            {
-                case "Депозитный":
-                    (Grid.SelectedItem as Client).Deposit.isOpen = true;
-                    break;
-
-                case "Недепозитный":
-                    (Grid.SelectedItem as Client).NotDeposit.isOpen = true;
-                    break;
-            }
+            (TypeAccOpenComboBox.SelectedItem as IAccount<Funtic>).isOpen = true;
             TypeAccOpenComboBox.SelectedIndex = -1;
             TypeAccOpenComboBox.Visibility = Visibility.Collapsed;
             CheckedAccounts();
@@ -113,16 +104,7 @@ namespace Module_13
 
         private void CLOSE_ACC_Button_Click(object sender, RoutedEventArgs e)
         {
-            switch (TypeAccRemoveComboBox.SelectedItem.ToString())
-            {
-                case "Депозитный":
-                    (Grid.SelectedItem as Client).Deposit.isOpen = false;
-                    break;
-
-                case "Недепозитный":
-                    (Grid.SelectedItem as Client).NotDeposit.isOpen = false;
-                    break;
-            }
+            (TypeAccRemoveComboBox.SelectedItem as IAccount<Funtic>).isOpen = false;
             TypeAccRemoveComboBox.SelectedIndex = -1;
             TypeAccRemoveComboBox.Visibility = Visibility.Collapsed;
             CheckedAccounts();
@@ -132,16 +114,8 @@ namespace Module_13
         private void TOPUP_ACC_Button_Click(object sender, RoutedEventArgs e)
         {
             Funtic funtic = new(Convert.ToInt32(TopUpAccTextBox.Text));
-            switch (TypeAccTopUpComboBox.SelectedItem.ToString())
-            {
-                case "Депозитный":
-                    (Grid.SelectedItem as Client).Deposit.SetBablo(funtic);
-                    break;
 
-                case "Недепозитный":
-                    (Grid.SelectedItem as Client).NotDeposit.SetBablo(funtic);
-                    break;
-            }
+            (TypeAccTopUpComboBox.SelectedItem as IAccount<Funtic>).SetBablo(funtic);
             TypeAccTopUpComboBox.SelectedIndex = -1;
             TypeAccTopUpComboBox.Visibility = Visibility.Collapsed;
             TopUpAccTextBox.Text = "";
@@ -164,37 +138,29 @@ namespace Module_13
 
         private void CheckedAccounts()
         {
-            TypeAccOpenComboBox.Items.Clear();
-            TypeAccRemoveComboBox.Items.Clear();
-            TypeAccTopUpComboBox.Items.Clear();
-            FromWhereAccComboBox.Items.Clear();
+            TypeAccOpenComboBox.ItemsSource = GetListTypeAccNotOpen(SelectedClient.ID);
+            TypeAccRemoveComboBox.ItemsSource = GetListTypeAccOpen(SelectedClient.ID);
+            TypeAccTopUpComboBox.ItemsSource = GetListTypeAccOpen(SelectedClient.ID);
+            FromWhereAccComboBox.ItemsSource = GetListTypeAccOpen(SelectedClient.ID);
             if ((Grid.SelectedItem as Client).Deposit.isOpen)
             {
                 DepAccTextBox.Visibility = Visibility.Visible;
                 DepAccTextBlock.Visibility = Visibility.Visible;
-                TypeAccRemoveComboBox.Items.Add("Депозитный");
-                TypeAccTopUpComboBox.Items.Add("Депозитный");
-                FromWhereAccComboBox.Items.Add("Депозитный");
             }
             else
             {
                 DepAccTextBox.Visibility = Visibility.Collapsed;
                 DepAccTextBlock.Visibility = Visibility.Collapsed;
-                TypeAccOpenComboBox.Items.Add("Депозитный");
             }
             if ((Grid.SelectedItem as Client).NotDeposit.isOpen)
             {
                 NotDepAccTextBox.Visibility = Visibility.Visible;
                 NotDepAccTextBlock.Visibility = Visibility.Visible;
-                TypeAccRemoveComboBox.Items.Add("Недепозитный");
-                TypeAccTopUpComboBox.Items.Add("Недепозитный");
-                FromWhereAccComboBox.Items.Add("Недепозитный");
             }
             else
             {
                 NotDepAccTextBox.Visibility = Visibility.Collapsed;
                 NotDepAccTextBlock.Visibility = Visibility.Collapsed;
-                TypeAccOpenComboBox.Items.Add("Недепозитный");
             }
             TypeAccOpenComboBox.Visibility = (TypeAccOpenComboBox.Items.Count == 0) ? Visibility.Collapsed : Visibility.Visible;
         }
@@ -256,32 +222,51 @@ namespace Module_13
         {
             ToWhereAccComboBox.Visibility = Visibility.Visible;
             ToWhereAccTextBlock.Visibility = Visibility.Visible;
+            ToWhereAccComboBox.ItemsSource = GetListTypeAccOpen(int.Parse((sender as ComboBox).SelectedItem.ToString()));
+        }
+
+        private void ToWhereAccComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TransferTextBlock.Visibility = Visibility.Visible;
+            AmountToTransfer.Visibility = Visibility.Visible;
+            TransferButton.Visibility = Visibility.Visible;
+        }
+
+        private void TransferButton_Click(object sender, RoutedEventArgs e)
+        {
+            int funtic = Convert.ToInt32(AmountToTransfer.Text);
+            int ID = int.Parse(Id_ComboBox.SelectedItem.ToString());
+            (ToWhereAccComboBox.SelectedItem as IAccount<Funtic>)
+                .SetBablo((FromWhereAccComboBox.SelectedItem as IAccount<Funtic>)
+                .GetBablo(funtic));
+            StartStateTransferGroup();
+            UpdateAccounts();
         }
 
         #endregion Transfer
 
-        private void ToWhereAccComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-        }
+        #region MetodsFor ComboBox.ItemSorce
 
-        private IEnumerable<string> GetListTypeAccOpen(int ID)
+        private IEnumerable<IAccount<Funtic>> GetListTypeAccOpen(int ID)
         {
-            List<string> result = new List<string>();
+            List<IAccount<Funtic>> result = new();
             if (A[ID].Deposit.isOpen)
-                result.Add("Депозитный");
+                result.Add(A[ID].Deposit);
             if (A[ID].NotDeposit.isOpen)
-                result.Add("Недепозитный");
+                result.Add(A[ID].NotDeposit);
             return result;
         }
 
-        private IEnumerable<string> GetListTypeAccNotOpen(int ID)
+        private IEnumerable<IAccount<Funtic>> GetListTypeAccNotOpen(int ID)
         {
-            List<string> result = new List<string>();
+            List<IAccount<Funtic>> result = new();
             if (!A[ID].Deposit.isOpen)
-                result.Add("Депозитный");
+                result.Add(A[ID].Deposit);
             if (!A[ID].NotDeposit.isOpen)
-                result.Add("Недепозитный");
+                result.Add(A[ID].NotDeposit);
             return result;
         }
+
+        #endregion MetodsFor ComboBox.ItemSorce
     }
 }
