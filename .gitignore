@@ -15,6 +15,7 @@ Release/
 /.gitattributes
 /packages
 /SimpraCLI/Properties/launchSettings.json
+token.txt
 
 *.zip
 *.7z
