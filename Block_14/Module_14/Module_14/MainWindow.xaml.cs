@@ -44,6 +44,11 @@ namespace Module_14
             Grid.ItemsSource = A.Clients;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Grid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedClient = (sender as DataGrid).SelectedItem as Client;
