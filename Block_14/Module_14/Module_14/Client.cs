@@ -26,6 +26,11 @@ namespace Module_14
     {
         public List<Client> Clients { get; set; }
 
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public Client this[int ID]
         {
             get
